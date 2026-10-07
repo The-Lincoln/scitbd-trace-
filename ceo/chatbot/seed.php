@@ -1,0 +1,46 @@
+<?php
+$db = new PDO('sqlite:D:/CRM_with_GOOGLE_Sheet/ceo/ceo/chatbot/scitbd_bot.sqlite');
+$db->exec("CREATE TABLE IF NOT EXISTS knowledge_bank (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    category TEXT DEFAULT 'General',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)");
+$db->exec('DELETE FROM knowledge_bank');
+
+$entries = [
+    ['Q1: What is SCITBD?', 'Social Communication IT Bangladesh (SCITBD) is a specialized global digital products and IT services provider headquartered in Tangail, Dhaka, Bangladesh. Operating with "Silicon Valley precision and Dhaka agility," SCITBD delivers enterprise-grade software, digital transformation, and Monitoring & Evaluation (M&E) solutions across 30+ countries on 7 continents. The company functions under a 24/7 Master AI CEO Directive as a perpetual, autonomous executive intelligence.', 'Company'],
+    ['Q2: Who is the Founder of SCITBD?', 'SCITBD was founded by Md Shoeb Lincoln, a humanitarian professional, FinTech architect, data analyst, and full-stack software engineer. He holds a BBA and an MBA in Human Resources Management from American International University Bangladesh (AIUB), alongside specialized training in research methodology, SPSS, STATA, CMDRR, and M&E systems from the University of Dhaka, SANGAT India, and Learning for Life Bangladesh.', 'Executive'],
+    ['Q3: What is Md Shoeb Lincoln\'s professional track record?', 'Md Shoeb Lincoln brings over 13 years of practical experience (since 2011) in project management, quantitative research, database engineering, and M&E systems. He has led a team of 100+ professionals, delivering 500+ successful projects across more than 50 government organizations, donor agencies, NGOs, and private enterprises. His past roles include Monitoring Officer at the Bangladesh Red Crescent Society (BDRCS) and BAPSA, Data Analysis Officer at POPI, and DIC Coordinator at HELP.', 'Executive'],
+    ['Q4: What are SCITBD\'s 17 Strategic Capabilities?', 'SCITBD delivers a suite of 17 core service lines: ICT Consultancy & Digital Transformation, Website Development, Custom Software (ERP, HRM, Hospital Mgmt, POS, CRM, School systems), Mobile App Development (Native & Cross-Platform), E-Learning & LMS, AI & Data Solutions (GPT-4 chatbots, NLP, face recognition), Cybersecurity & IT Support, Digital Commerce & Payment Systems, Digital Marketing & Branding, Government & Enterprise Solutions, ICT Consultancy & Cloud Strategy, Native & Cross-Platform Mobile Apps, AI Solutions & Intelligent Automation, Cybersecurity & Compliance (ISO 27001, GDPR), Digital Audits, Machine Learning (ML), and AI Agent (autonomous 24/7 execution).', 'Services'],
+    ['Q5: What specialized M&E software does SCITBD build?', 'SCITBD offers an audit-ready M&E & Database Monitoring Software designed for humanitarian agencies and donor-funded projects. Key modules include: Result-Based M&E Engine (tracks inputs, outputs, outcomes against donor Logframes), Custom Indicator Tracker (SMART, QQTTL, CREAM frameworks), Beneficiary Tracking Database (multi-tier access control), Automated Data Validation (built-in rules), and Interactive Reporting Dashboard (real-time visual progress summaries).', 'Services'],
+    ['Q6: What is SCITBD\'s core technical stack?', 'SCITBD builds lightweight, high-performance systems using PHP, MySQL, SQLite, HTML5, CSS3, JavaScript, Bootstrap, Python, REST APIs, and Google Apps Script. For statistical research, SCITBD utilizes Excel, SPSS, and STATA.', 'Technical'],
+    ['Q7: How does SCITBD maintain 24/7 operations globally?', 'SCITBD executes a 24-Hour Autonomous Operational Cycle aligned with Bangladesh Standard Time (BST / UTC+6) across four dynamic blocks: Block 1 (06:00-12:00 BST): South Asia focus - SEO, e-GP tenders, lead nurturing. Block 2 (12:00-18:00 BST): Middle East & European openings - ad audits, B2B prospecting. Block 3 (18:00-00:00 BST): UK & North America - US ad launches, proposal creation. Block 4 (00:00-06:00 BST): Oceania & global sync - campaign optimization, CEO briefings.', 'Operations'],
+    ['Q8: What are SCITBD\'s non-negotiable SLAs?', 'SCITBD enforces strict SLA standards: Client Support Ticket - Sub-2-hour response with automated dispatch. Inbound Lead RFP - Customized proposal within 2 hours via Proposal Factory. High-Value Lead Escalation (>= $10,000 USD) - CEO Video Message within 24 hours. Negative Review / Mention - Auto-flagged in under 1 hour. Low NPS Score (<40) - Emergency CEO review within 48 hours. System Hosting Uptime - 99.9% guarantee.', 'SLA'],
+    ['Q9: Which industries does SCITBD serve?', 'SCITBD provides tailored solutions for seven primary industries: Public Sector (government agencies, ministries), Education (schools, universities, EdTech), Healthcare (hospitals, clinics, telemedicine), Commerce & Retail (e-commerce, retail chains), Non-Profit & NGOs (humanitarian organizations, donor projects), Enterprise (large corporations), and SaaS & Startups (MVPs, API infrastructure).', 'Markets'],
+    ['Q10: In which countries does SCITBD operate?', 'SCITBD has delivered projects across 30+ countries with active scaling toward 40+ countries in late 2026 and 60+ countries long-term. Key markets include Bangladesh, UAE, Saudi Arabia, UK, Germany, France, USA, Canada, Australia, Singapore, and various nations across Africa.', 'Markets'],
+    ['Q11: What currencies and languages are supported?', 'Currencies: Multi-currency transactions supported in USD, BDT, and EUR. Languages: Platforms and client interactions support English, Bangla, Arabic, French, and Hindi, including Right-to-Left (RTL) language layouts.', 'Payments'],
+    ['Q12: What is the BDPay International framework?', 'Designed by founder Md Shoeb Lincoln, BDPay International is a universal payment integration framework connecting over 10 global and local payment gateways including Stripe, PayPal, and bKash, enabling frictionless cross-border transactions and e-wallet management.', 'Payments'],
+    ['Q13: What proprietary SaaS products is SCITBD launching?', 'Under its AI & Technology Division, SCITBD is rolling out three proprietary SaaS tools: AI Chatbot Builder (custom conversational AI deployment), AI Content Generator (automated marketing and technical content production), and AI Business Analytics Dashboard (real-time operational metrics and predictive intelligence).', 'Products'],
+    ['Q14: What e-learning courses does SCITBD offer?', 'SCITBD provides practical training modules for NGO professionals and researchers: M&E for NGO Beginners, Practical Research Methodology, Report Writing & Documentation, Practical Excel for NGO & Research Work, SPSS & STATA for Beginners in Social Research, and Wedding & Natural Light Photography.', 'Training'],
+    ['Q15: How can clients contact or book services?', 'Head Office Address: 1st Floor, House-13, Block-E, Purbo Adalot Para, Green Road, Tangail 1900, Dhaka, Bangladesh. Phone/WhatsApp: +880 1559-575338 | +880 1715-340463. Official Emails: socialcommunicationit@gmail.com | md.s.lincoln@gmail.com | shoeb_lincoln@outlook.com. Official Portals: scit.zya.me | scitbd.com. Compliance: ISO 27001 Certified and GDPR Compliant.', 'Contact'],
+    ['What are your pricing plans?', 'SCITBD Silver Strategic Capability plan starts at just 10,000 BDT. We accept payments in USD, BDT, and EUR. We guarantee a custom technical proposal delivered within our sub-2-hour SLA. Visit scit.zya.me/booking.php for details.', 'Pricing'],
+    ['How can I get a free consultation?', 'You can schedule a Free 10-Minute Zoom Consultation with our technical directors. Visit scit.zya.me/consultation.php or send us a message. Book your consultation today!', 'Contact'],
+    ['Do you offer AI chatbot solutions?', 'Yes! SCITBD specializes in Autonomous AI Agents and GPT-4 Chatbots. We offer enterprise clients a Free 30-Day AI Chatbot Trial to test our solutions risk-free. Claim your trial at scit.zya.me/consultation.php.', 'AI'],
+    ['What is your website development service?', 'SCITBD builds high-performance AI-driven corporate and E-commerce websites starting at our Silver tier (10,000 BDT). Our websites feature responsive design, SEO optimization, and direct booking capabilities.', 'Services'],
+    ['Do you provide cybersecurity services?', 'Yes! SCITBD provides Cybersecurity & IT Support including penetration testing, Web Application Firewall (WAF) setup, and Annual Maintenance Contracts (AMC). We are ISO 27001 and GDPR compliant.', 'Services'],
+    ['What custom software do you build?', 'SCITBD develops bespoke POS, HRM, Hospital Management, CRM, School Management, and ERP systems. Our Silver plan for custom software is just 10,000 BDT, designed to modernize your legacy systems with Silicon Valley precision and Dhaka agility.', 'Services'],
+];
+
+foreach ($entries as $e) {
+    $stmt = $db->prepare('INSERT INTO knowledge_bank (question, answer, category) VALUES (?, ?, ?)');
+    $stmt->execute([$e[0], $e[1], $e[2]]);
+}
+echo 'Successfully added ' . count($entries) . ' FAQ entries to Knowledge Bank.' . PHP_EOL;
+
+// Verify count
+$count = $db->query('SELECT COUNT(*) FROM knowledge_bank')->fetchColumn();
+echo 'Total knowledge bank entries: ' . $count . PHP_EOL;
+?>

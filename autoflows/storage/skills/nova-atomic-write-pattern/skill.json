@@ -1,0 +1,1 @@
+{"author":"Nova Kernel","confidence":0.92,"description":"Tmp-file + rename with unique names (PID + timestamp + random) for file writes (Nova promoted, conf 0.92).","license":"Apache-2.0","name":"nova-atomic-write-pattern","source":"council-review-round-5","status":"promoted","tags":"security, filesystem, patterns","version":"1.0.0"}

@@ -1,0 +1,1 @@
+{"author":"Nova Kernel","confidence":0.98,"description":"Validate user/LLM-supplied path values against containment boundary (Nova promoted, conf 0.98).","license":"Apache-2.0","name":"nova-path-traversal-defense","source":"council-review-round-5","status":"promoted","tags":"security, filesystem, patterns","version":"1.0.0"}

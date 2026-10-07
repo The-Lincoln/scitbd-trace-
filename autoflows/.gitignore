@@ -1,0 +1,7 @@
+# Dependencies (300+ folders via npm install — never commit)
+node_modules/
+npm-debug.log*
+
+# Secrets (bot tokens, API keys — never commit; copy from .env.example)
+.env
+.env.local

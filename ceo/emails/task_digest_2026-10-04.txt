@@ -1,0 +1,116 @@
+SCITBD DAILY TASK DIGEST - 2026-10-04 (2026-10-04 20:36 BST)
+============================================================
+
+SELECT TODAY'S TASK:
+  [20] AI Digest: Review & Select Today's 5 Social Media Posts
+        https://scit.zya.me/?action=accept_task&id=20&assignee=ai_agent
+  [21] AI Digest: Select Today's 5 SEO Blog Titles
+        https://scit.zya.me/?action=accept_task&id=21&assignee=ai_agent
+  [22] AI Digest: Select Today's 5 SEO Sales Emails
+        https://scit.zya.me/?action=accept_task&id=22&assignee=ai_agent
+  [23] AI Task: Online Ads DISPLAY Setup for Today's Content
+        https://scit.zya.me/?action=accept_task&id=23&assignee=ai_agent
+  [24] AI Task: Online Ads EARNING Model Optimisation
+        https://scit.zya.me/?action=accept_task&id=24&assignee=ai_agent
+  [25] [Directive #1] Global Branding Overhaul
+        https://scit.zya.me/?action=accept_task&id=25&assignee=ai_agent
+  [26] [Directive #2] LinkedIn Authority Campaign
+        https://scit.zya.me/?action=accept_task&id=26&assignee=ai_agent
+  [27] [Directive #3] SEO Domination Plan
+        https://scit.zya.me/?action=accept_task&id=27&assignee=ai_agent
+  [28] [Directive #4] Video Marketing Machine
+        https://scit.zya.me/?action=accept_task&id=28&assignee=ai_agent
+  [29] [Directive #5] Case Study Arsenal
+        https://scit.zya.me/?action=accept_task&id=29&assignee=ai_agent
+  [30] [Directive #6] International Client Acquisition
+        https://scit.zya.me/?action=accept_task&id=30&assignee=ai_agent
+  [31] [Directive #7] Proposal Factory
+        https://scit.zya.me/?action=accept_task&id=31&assignee=ai_agent
+  [32] [Directive #8] Partnership Network
+        https://scit.zya.me/?action=accept_task&id=32&assignee=ai_agent
+  [33] [Directive #9] Tender & RFP Monitoring
+        https://scit.zya.me/?action=accept_task&id=33&assignee=ai_agent
+  [34] [Directive #10] Retainer Conversion
+        https://scit.zya.me/?action=accept_task&id=34&assignee=ai_agent
+  [35] [Directive #11] AI Product Suite Launch
+        https://scit.zya.me/?action=accept_task&id=35&assignee=ai_agent
+  [36] [Directive #12] Marketing Automation Stack
+        https://scit.zya.me/?action=accept_task&id=36&assignee=ai_agent
+  [37] [Directive #13] Client AI Pilots
+        https://scit.zya.me/?action=accept_task&id=37&assignee=ai_agent
+  [38] [Directive #14] Data Analytics Dashboard
+        https://scit.zya.me/?action=accept_task&id=38&assignee=ai_agent
+  [39] [Directive #15] NPS Program
+        https://scit.zya.me/?action=accept_task&id=39&assignee=ai_agent
+  [40] [Directive #16] Upsell Automation
+        https://scit.zya.me/?action=accept_task&id=40&assignee=ai_agent
+  [41] [Directive #17] 24/7 Support Excellence
+        https://scit.zya.me/?action=accept_task&id=41&assignee=ai_agent
+  [42] [Directive #18] Client Community Hub
+        https://scit.zya.me/?action=accept_task&id=42&assignee=ai_agent
+  [43] [Directive #19] Revenue Target Architecture
+        https://scit.zya.me/?action=accept_task&id=43&assignee=ai_agent
+  [44] [Directive #20] Pricing Intelligence
+        https://scit.zya.me/?action=accept_task&id=44&assignee=ai_agent
+  [45] [Directive #21] CAC & LTV Tracking
+        https://scit.zya.me/?action=accept_task&id=45&assignee=ai_agent
+  [46] [Directive #22] Profitability Dashboard
+        https://scit.zya.me/?action=accept_task&id=46&assignee=ai_agent
+
+SOCIAL POSTS (5 per platform):
+  1. [57] Stop Losing Hours to Spreadsheets
+        https://scit.zya.me/?action=select_content&kind=facebook&id=1&date=2026-10-04
+  2. [67] Cloud Migration Without the Headache
+        https://scit.zya.me/?action=select_content&kind=facebook&id=2&date=2026-10-04
+  3. [57] 7 Workflows We'd Automate First
+        https://scit.zya.me/?action=select_content&kind=facebook&id=3&date=2026-10-04
+  4. [57] Your Website Ranks Page 2. Here's Why.
+        https://scit.zya.me/?action=select_content&kind=facebook&id=4&date=2026-10-04
+  5. [57] Turn Your Demo Into Revenue
+        https://scit.zya.me/?action=select_content&kind=facebook&id=5&date=2026-10-04
+  1. [57] The Spreadsheet Tax Is Real
+        https://scit.zya.me/?action=select_content&kind=linkedin&id=11&date=2026-10-04
+  2. [57] 200 Workloads. Zero Downtime.
+        https://scit.zya.me/?action=select_content&kind=linkedin&id=12&date=2026-10-04
+  3. [57] 20 Hours a Week, Recovered
+        https://scit.zya.me/?action=select_content&kind=linkedin&id=13&date=2026-10-04
+  4. [47] Page 2 Is Where Good Companies Die
+        https://scit.zya.me/?action=select_content&kind=linkedin&id=14&date=2026-10-04
+  5. [47] Buyers Watch. Stakeholders Skim.
+        https://scit.zya.me/?action=select_content&kind=linkedin&id=15&date=2026-10-04
+  1. [67] Custom ERP Explained in 6 Minutes
+        https://scit.zya.me/?action=select_content&kind=youtube&id=6&date=2026-10-04
+  2. [57] Cloud Migration: 5 Phases, Zero Downtime
+        https://scit.zya.me/?action=select_content&kind=youtube&id=7&date=2026-10-04
+  3. [57] Automate These 7 Workflows First
+        https://scit.zya.me/?action=select_content&kind=youtube&id=8&date=2026-10-04
+  4. [57] Why Your B2B Content Never Ranks
+        https://scit.zya.me/?action=select_content&kind=youtube&id=9&date=2026-10-04
+  5. [57] The Demo Video Script Framework
+        https://scit.zya.me/?action=select_content&kind=youtube&id=10&date=2026-10-04
+
+BLOG TITLES (5):
+  1. [85] Custom ERP Software Development: Cut Operational Costs by 40% in 2026
+        https://scit.zya.me/?action=select_content&kind=blog&id=16&date=2026-10-04
+  2. [93] Cloud Migration Services: A Step-by-Step Roadmap for Mid-Market Firms
+        https://scit.zya.me/?action=select_content&kind=blog&id=17&date=2026-10-04
+  3. [93] AI Automation for Business: 7 Workflows That Reclaim 20+ Hours Weekly
+        https://scit.zya.me/?action=select_content&kind=blog&id=18&date=2026-10-04
+  4. [100] B2B SEO Agency Playbook: Rank Faster with Topic Clusters (2026)
+        https://scit.zya.me/?action=select_content&kind=blog&id=19&date=2026-10-04
+  5. [85] Corporate Video Production for Tech Brands: Turn Demos Into Pipeline
+        https://scit.zya.me/?action=select_content&kind=blog&id=20&date=2026-10-04
+
+SALES EMAILS (5):
+  1. [65] Your spreadsheets are costing you 3 days a month
+        https://scit.zya.me/?action=select_content&kind=email&id=21&date=2026-10-04
+  2. [65] The migration checklist we use for 200+ workloads
+        https://scit.zya.me/?action=select_content&kind=email&id=22&date=2026-10-04
+  3. [58] 7 automations. 20 hours back.
+        https://scit.zya.me/?action=select_content&kind=email&id=23&date=2026-10-04
+  4. [65] Your best article is ranking #14 (and why that matters)
+        https://scit.zya.me/?action=select_content&kind=email&id=24&date=2026-10-04
+  5. [75] Your demo deserves better than a forwarded PDF
+        https://scit.zya.me/?action=select_content&kind=email&id=25&date=2026-10-04
+
+Files: content/2026-10-04/

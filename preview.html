@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Framework · Live Preview</title>
+    <meta name="description" content="Open Source Intelligence Framework - PHP + SQLite + Bootstrap demo">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #f5f7fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #eef1f6;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f4f9;
+            --text-primary: #1a1f2e;
+            --text-secondary: #4a5568;
+            --text-muted: #6c757d;
+            --border-color: #e2e8f0;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: rgba(37, 99, 235, 0.1);
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --navbar-bg: #0f172a;
+            --navbar-text: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+            --code-bg: #f1f5f9;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #131826;
+            --bg-tertiary: #1c2236;
+            --bg-card: #131826;
+            --bg-hover: #1c2236;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #2d3748;
+            --accent: #00d9ff;
+            --accent-hover: #00b8e6;
+            --accent-light: rgba(0, 217, 255, 0.1);
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --navbar-bg: #050811;
+            --navbar-text: #00d9ff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.5);
+            --code-bg: #0d121f;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            transition: background 0.2s, color 0.2s;
+        }
+        [data-theme="dark"] body {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(0, 217, 255, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 30%),
+                var(--bg-primary);
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-hover); }
+
+        .navbar {
+            background: var(--navbar-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        [data-theme="dark"] .navbar {
+            background: linear-gradient(180deg, #050811 0%, #0a0e1a 100%);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+        }
+        .navbar-brand {
+            color: var(--navbar-text);
+            font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+        }
+        [data-theme="dark"] .navbar-brand {
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.3);
+        }
+        .navbar-brand i { color: var(--accent); font-size: 1.2em; }
+        .navbar .nav-link { color: rgba(255, 255, 255, 0.85); }
+        .navbar .nav-link:hover { color: var(--accent); }
+
+        .search-form {
+            min-width: 320px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 2px 4px;
+            display: flex; align-items: center;
+        }
+        .search-form input {
+            background: transparent !important;
+            border: none !important;
+            color: var(--text-primary) !important;
+            box-shadow: none !important;
+        }
+        .search-form input::placeholder { color: var(--text-muted); }
+        .btn-search { background: transparent; border: none; color: var(--accent); }
+
+        .btn-theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: rgba(255,255,255,0.85);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-theme-toggle:hover { background: rgba(255,255,255,0.1); color: var(--accent); }
+
+        .hero-section {
+            padding: 2rem 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        [data-theme="dark"] .hero-section h1 {
+            background: linear-gradient(90deg, var(--accent) 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-section .lead { color: var(--text-secondary); }
+        .quick-stats {
+            margin-top: 1rem;
+            display: flex; gap: 0.5rem; justify-content: center;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            color: var(--text-primary);
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+        }
+        .card-header {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .category-card { cursor: pointer; text-decoration: none; color: inherit; }
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+        .category-card .card-title {
+            color: var(--text-primary);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .category-card:hover .card-title { color: var(--accent); }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+        .tool-card .card-body { padding: 1rem; position: relative; }
+        .tool-icon img {
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            padding: 2px;
+        }
+        .tool-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .tool-name a { color: var(--text-primary); }
+        .tool-name a:hover { color: var(--accent); }
+        .tool-desc {
+            color: var(--text-secondary);
+            min-height: 2.5rem;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+        .tool-meta {
+            display: flex; flex-wrap: wrap; gap: 4px;
+            margin-bottom: 0.5rem;
+        }
+        .tool-meta .badge { font-size: 0.7rem; font-weight: 500; }
+        .tool-footer {
+            border-top: 1px dashed var(--border-color);
+            padding-top: 0.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .tool-rating .stars { color: var(--warning); font-size: 0.85rem; }
+        .tool-rating small { color: var(--text-muted); }
+
+        .btn-fav {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-fav:hover { border-color: var(--warning); color: var(--warning); }
+        .btn-fav.active { background: var(--warning); border-color: var(--warning); color: #fff; }
+
+        .tree-card {
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+        .tree, .tree ul { list-style: none; padding: 0; margin: 0; }
+        .tree-node { position: relative; }
+        .tree-label {
+            display: flex; align-items: center;
+            padding: 6px 8px;
+            cursor: pointer;
+            transition: background 0.1s;
+            border-left: 3px solid transparent;
+        }
+        .tree-label:hover { background: var(--bg-hover); }
+        .tree-node.active > .tree-label {
+            background: var(--accent-light);
+            border-left-color: var(--accent);
+        }
+        .tree-toggle {
+            font-size: 0.7rem; width: 14px;
+            color: var(--text-muted);
+            transition: transform 0.15s;
+            cursor: pointer;
+        }
+        .tree-node.expanded > .tree-label .tree-toggle { transform: rotate(90deg); }
+        .tree-bullet { font-size: 0.3rem; width: 14px; color: var(--text-muted); }
+        .tree-label a {
+            color: var(--text-primary);
+            display: flex; align-items: center; gap: 6px;
+            flex: 1; font-size: 0.9rem;
+        }
+        .tree-label a:hover { color: var(--accent); }
+        .tree-label a i.bi { color: var(--accent); width: 16px; text-align: center; }
+        .tree-count {
+            margin-left: auto;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            border-radius: 10px;
+            padding: 1px 8px;
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .tree-node.active > .tree-label .tree-count {
+            background: var(--accent); color: #fff;
+        }
+
+        .view-toggle .btn { color: var(--text-secondary); }
+        .view-toggle .btn.active {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+        }
+
+        [data-theme="dark"] .bg-secondary { background-color: #475569 !important; }
+        [data-theme="dark"] .bg-dark { background-color: #1e293b !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .bg-light { background-color: #1e293b !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .text-dark { color: #cbd5e1 !important; }
+        [data-theme="dark"] .text-muted { color: var(--text-muted) !important; }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        .footer a { color: var(--text-muted); }
+        .footer a:hover { color: var(--accent); }
+
+        .badge.bg-success { background-color: var(--success) !important; }
+        .badge.bg-danger { background-color: var(--danger) !important; }
+        .badge.bg-warning { background-color: var(--warning) !important; color: #1a1f2e !important; }
+
+        .alert {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .alert-info {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tool-card-wrapper, .category-card { animation: fadeIn 0.2s ease-out; }
+
+        .btn-primary { background: var(--accent); border-color: var(--accent); }
+        .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+        .btn-outline-primary { color: var(--accent); border-color: var(--accent); }
+        .btn-outline-secondary { color: var(--text-secondary); border-color: var(--border-color); }
+
+        .preview-banner {
+            background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .preview-banner a { color: #fff; text-decoration: underline; }
+        .preview-banner code {
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            padding: 1px 6px;
+            border-radius: 3px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+        }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+
+        .app-toast {
+            position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+            padding: 12px 20px; border-radius: 8px; color: #fff;
+            background: #16a34a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 0.9rem; max-width: 320px;
+            animation: fadeIn 0.2s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="preview-banner">
+    <i class="fas fa-eye"></i>
+    <strong>Live Preview</strong> — Static HTML demo of the OSINT Framework.
+    The full PHP + SQLite app has admin panel, user accounts, ratings, and JSON API.
+    See <code>README.md</code> for deployment instructions.
+</div>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-bug-fill"></i>
+            <span>OSINT Framework</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-main">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav-main">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <form class="d-flex search-form" role="search" onsubmit="return doSearch(event)">
+                        <input class="form-control" type="search" id="global-search"
+                               placeholder="Search 277+ OSINT tools..." aria-label="Search">
+                        <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav align-items-center gap-2">
+                <li class="nav-item">
+                    <button class="btn btn-sm btn-theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <i class="bi bi-sun-fill" id="theme-icon"></i>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light btn-sm" href="#" onclick="alert('In the full PHP app, this opens the registration form.')">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-sm" href="#" onclick="alert('In the full PHP app, this opens the login form.')">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container-fluid py-4">
+    <div class="row g-3">
+        <aside class="col-lg-3 col-md-4 d-none d-md-block" id="sidebar-tree">
+            <div class="card tree-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-diagram-3"></i> Categories</span>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-secondary btn-sm" id="expand-all" title="Expand all"><i class="fas fa-angle-double-down"></i></button>
+                        <button class="btn btn-outline-secondary btn-sm" id="collapse-all" title="Collapse all"><i class="fas fa-angle-double-up"></i></button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="tree" id="tree-root"></ul>
+                </div>
+            </div>
+        </aside>
+
+        <section class="col-lg-9 col-md-8" id="main-content">
+            <div id="hero-area" class="hero-section mb-4">
+                <h1 class="display-5"><i class="bi bi-bug-fill"></i> OSINT Framework</h1>
+                <p class="lead text-muted">A comprehensive directory of OSINT tools organized by category — find the right tool for your investigation.</p>
+                <div class="quick-stats">
+                    <span class="badge bg-primary fs-6" id="cat-count">20 categories</span>
+                    <span class="badge bg-success fs-6" id="tool-count">277 tools</span>
+                    <span class="badge bg-warning text-dark fs-6">PHP + SQLite + Bootstrap</span>
+                </div>
+            </div>
+
+            <div id="category-header" class="mb-3" style="display:none">
+                <h2 id="cat-title"></h2>
+                <p class="text-muted" id="cat-desc"></p>
+                <a href="#" onclick="showHome();return false" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to all categories
+                </a>
+            </div>
+
+            <div id="search-results" class="alert alert-info mb-3" style="display:none">
+                <i class="fas fa-search"></i>
+                Found <strong id="search-count">0</strong> tool(s) matching <em id="search-query"></em>
+                <a href="#" onclick="showHome();return false" class="btn btn-sm btn-outline-secondary float-end">Clear</a>
+            </div>
+
+            <div class="view-toggle mb-3 d-flex justify-content-between align-items-center">
+                <div class="btn-group btn-group-sm" role="group">
+                    <button class="btn btn-outline-secondary active" onclick="setView('hybrid', this)"><i class="fas fa-columns"></i> Hybrid</button>
+                    <button class="btn btn-outline-secondary" onclick="setView('grid', this)"><i class="fas fa-th"></i> Grid</button>
+                    <button class="btn btn-outline-secondary" onclick="setView('tree', this)"><i class="fas fa-sitemap"></i> Tree</button>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary d-md-none" data-bs-toggle="modal" data-bs-target="#mobileTreeModal">
+                    <i class="fas fa-bars"></i> Categories
+                </button>
+            </div>
+
+            <div class="row g-3" id="content-area"></div>
+        </section>
+    </div>
+</main>
+
+<div class="modal fade" id="mobileTreeModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Categories</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="mobile-tree-container"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <span class="text-muted">
+                    <i class="bi bi-bug-fill"></i>
+                    OSINT Framework &middot; Built with PHP + SQLite + Bootstrap
+                </span>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span class="text-muted small">
+                    <a href="https://osintframework.com" target="_blank">Original OSINT Framework</a>
+                    &middot; Static preview (admin & API not active)
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ============================================================
+//  OSINT Framework - Preview data + UI logic
+// ============================================================
+
+const CATEGORIES = [
+    { name: 'Username', slug: 'username', icon: 'person', desc: 'Find accounts tied to a username across platforms', children: [
+        { name: 'Username Search', slug: 'username-search', icon: 'search', desc: 'General username lookup aggregators' },
+        { name: 'Social Networks', slug: 'username-social', icon: 'share', desc: 'Social network username discovery' },
+        { name: 'Forums & Communities', slug: 'username-forums', icon: 'chat', desc: 'Forum and community platforms' },
+        { name: 'Gaming', slug: 'username-gaming', icon: 'controller', desc: 'Gaming platforms and IDs' },
+    ]},
+    { name: 'Email Address', slug: 'email', icon: 'envelope', desc: 'Investigate email addresses', children: [
+        { name: 'Email Search', slug: 'email-search', icon: 'search', desc: 'Email lookup services' },
+        { name: 'Breach Check', slug: 'email-breach', icon: 'shield', desc: 'Check email in known breaches' },
+        { name: 'Email Verification', slug: 'email-verify', icon: 'check-circle', desc: 'Verify email deliverability' },
+    ]},
+    { name: 'Domain Name', slug: 'domain', icon: 'globe', desc: 'Domain and DNS intelligence', children: [
+        { name: 'WHOIS', slug: 'domain-whois', icon: 'person-badge', desc: 'Domain registration records' },
+        { name: 'DNS Records', slug: 'domain-dns', icon: 'hdd-network', desc: 'DNS resolution and history' },
+        { name: 'Subdomains', slug: 'domain-subdomains', icon: 'diagram-3', desc: 'Subdomain enumeration' },
+        { name: 'Certificate Transparency', slug: 'domain-cert', icon: 'patch-check', desc: 'TLS certificate logs' },
+        { name: 'Web Archive', slug: 'domain-archive', icon: 'archive', desc: 'Historical snapshots' },
+    ]},
+    { name: 'IP Address', slug: 'ip', icon: 'hdd-network', desc: 'IP geolocation and reputation', children: [
+        { name: 'IP Geo', slug: 'ip-geo', icon: 'geo-alt', desc: 'Geolocation lookup' },
+        { name: 'IP Reputation', slug: 'ip-reputation', icon: 'shield-check', desc: 'Reputation and abuse checks' },
+        { name: 'ASN / BGP', slug: 'ip-asn', icon: 'diagram-2', desc: 'Autonomous system info' },
+    ]},
+    { name: 'Phone Number', slug: 'phone', icon: 'telephone', desc: 'Phone number investigation', children: [
+        { name: 'Caller ID', slug: 'phone-caller', icon: 'telephone-inbound', desc: 'Caller identification' },
+        { name: 'Carrier Lookup', slug: 'phone-carrier', icon: 'truck', desc: 'Mobile carrier detection' },
+    ]},
+    { name: 'People', slug: 'people', icon: 'people', desc: 'People search and identity', children: [
+        { name: 'People Search', slug: 'people-search', icon: 'search', desc: 'Aggregated people search' },
+        { name: 'Public Records', slug: 'people-records', icon: 'file-text', desc: 'Government public records' },
+        { name: 'Court Records', slug: 'people-court', icon: 'bank', desc: 'Court case lookup' },
+        { name: 'Genealogy', slug: 'people-genealogy', icon: 'diagram-3', desc: 'Family history records' },
+    ]},
+    { name: 'Image / Photo', slug: 'image', icon: 'image', desc: 'Reverse image search and EXIF', children: [
+        { name: 'Reverse Search', slug: 'image-reverse', icon: 'search', desc: 'Find image sources online' },
+        { name: 'EXIF Data', slug: 'image-exif', icon: 'camera', desc: 'Extract embedded metadata' },
+        { name: 'Facial Recognition', slug: 'image-facial', icon: 'person-circle', desc: 'Face match services' },
+    ]},
+    { name: 'Social Media', slug: 'social', icon: 'share', desc: 'Social media intelligence', children: [
+        { name: 'Twitter/X', slug: 'social-twitter', icon: 'twitter', desc: 'Twitter/X investigation' },
+        { name: 'Facebook', slug: 'social-facebook', icon: 'facebook', desc: 'Facebook investigation' },
+        { name: 'Instagram', slug: 'social-instagram', icon: 'instagram', desc: 'Instagram investigation' },
+        { name: 'LinkedIn', slug: 'social-linkedin', icon: 'linkedin', desc: 'LinkedIn professional data' },
+        { name: 'Reddit', slug: 'social-reddit', icon: 'reddit', desc: 'Reddit user history' },
+    ]},
+    { name: 'Search Engines', slug: 'search-engines', icon: 'search', desc: 'Specialized search engines', children: [
+        { name: 'General', slug: 'se-general', icon: 'globe', desc: 'Mainstream search engines' },
+        { name: 'Privacy Search', slug: 'se-privacy', icon: 'shield-lock', desc: 'Privacy-respecting engines' },
+        { name: 'Code Search', slug: 'se-code', icon: 'code-slash', desc: 'Source code search' },
+        { name: 'Pastebin', slug: 'se-paste', icon: 'file-text', desc: 'Paste sites search' },
+    ]},
+    { name: 'Public Records', slug: 'public-records', icon: 'archive', desc: 'Government records', children: [
+        { name: 'Voter Records', slug: 'pr-voter', icon: 'card-checklist', desc: 'Voter registration' },
+        { name: 'Business Records', slug: 'pr-business', icon: 'building', desc: 'Company registrations' },
+    ]},
+    { name: 'Business Records', slug: 'business', icon: 'briefcase', desc: 'Corporate intelligence', children: [
+        { name: 'Company Search', slug: 'biz-search', icon: 'search', desc: 'Company registry lookup' },
+        { name: 'Financial Filings', slug: 'biz-finance', icon: 'graph-up', desc: 'SEC and filings' },
+        { name: 'Patents', slug: 'biz-patents', icon: 'lightbulb', desc: 'Patent databases' },
+    ]},
+    { name: 'Vehicle Records', slug: 'vehicle', icon: 'car-front', desc: 'Vehicle identification', children: [
+        { name: 'License Plate', slug: 'veh-plate', icon: 'card-text', desc: 'License plate lookup' },
+        { name: 'VIN Check', slug: 'veh-vin', icon: 'upc', desc: 'Vehicle history' },
+    ]},
+    { name: 'Maps & Geo', slug: 'maps', icon: 'geo-alt', desc: 'Geospatial intelligence', children: [
+        { name: 'Maps & Satellite', slug: 'geo-sat', icon: 'globe', desc: 'Satellite imagery' },
+        { name: 'Street View', slug: 'geo-street', icon: 'signpost', desc: 'Street level imagery' },
+    ]},
+    { name: 'Network', slug: 'network', icon: 'hdd-network', desc: 'Network infrastructure', children: [
+        { name: 'Port Scanning', slug: 'net-ports', icon: 'plug', desc: 'Port scanner services' },
+        { name: 'Web Tech', slug: 'net-tech', icon: 'cpu', desc: 'Web tech fingerprinting' },
+        { name: 'SSL/TLS', slug: 'net-ssl', icon: 'lock', desc: 'SSL certificate info' },
+    ]},
+    { name: 'Crypto', slug: 'crypto', icon: 'currency-bitcoin', desc: 'Cryptocurrency investigation', children: [
+        { name: 'Bitcoin', slug: 'crypto-btc', icon: 'currency-bitcoin', desc: 'Bitcoin blockchain' },
+        { name: 'Ethereum', slug: 'crypto-eth', icon: 'diamond', desc: 'Ethereum blockchain' },
+    ]},
+    { name: 'Breach / Leaks', slug: 'breaches', icon: 'shield-exclamation', desc: 'Data breach and leak databases', children: [
+        { name: 'Breach Databases', slug: 'br-db', icon: 'database', desc: 'Aggregated breach data' },
+        { name: 'Dark Web', slug: 'br-darkweb', icon: 'mask', desc: 'Dark web mention search' },
+    ]},
+];
+
+const TOOLS = {
+    'username-search': [
+        { name: 'Namechk', url: 'https://namechk.com', desc: 'Check username availability across 90+ sites', cost: 'free', access: 'web', auth: false, tags: 'username,profiles', rating: 4.5, count: 12 },
+        { name: 'WhatsMyName', url: 'https://whatsmyname.app', desc: 'Username enumeration across 600+ sites', cost: 'free', access: 'web', auth: false, tags: 'username,enum', rating: 4.7, count: 8 },
+        { name: 'Sherlock', url: 'https://github.com/sherlock-project/sherlock', desc: 'CLI tool to hunt username across 400+ sites', cost: 'free', access: 'software', auth: false, tags: 'username,cli', rating: 4.9, count: 25 },
+        { name: 'Instant Username Search', url: 'https://instantusername.com', desc: 'Fast username search across multiple platforms', cost: 'free', access: 'web', auth: false, tags: 'username,search', rating: 4.2, count: 5 },
+        { name: 'Maigret', url: 'https://github.com/soxoj/maigret', desc: 'Username OSINT tool based on Sherlock', cost: 'free', access: 'software', auth: false, tags: 'username,cli', rating: 4.6, count: 7 },
+    ],
+    'username-social': [
+        { name: 'KnowEm', url: 'https://knowem.com', desc: 'Username search on 500+ social networks', cost: 'freemium', access: 'web', auth: false, tags: 'username,social', rating: 4.0, count: 6 },
+        { name: 'Namevine', url: 'https://namevine.com', desc: 'Real-time username + domain search', cost: 'free', access: 'web', auth: false, tags: 'username,domain', rating: 3.8, count: 3 },
+    ],
+    'username-forums': [
+        { name: 'Boardreader', url: 'https://boardreader.com', desc: 'Search across forums and boards', cost: 'free', access: 'web', auth: false, tags: 'forum,search', rating: 3.9, count: 4 },
+    ],
+    'username-gaming': [
+        { name: 'SteamID', url: 'https://steamid.xyz', desc: 'Look up Steam user profile data', cost: 'free', access: 'web', auth: false, tags: 'steam,gaming', rating: 4.3, count: 9 },
+        { name: 'SteamDB', url: 'https://steamdb.info', desc: 'Steam database of games and profiles', cost: 'free', access: 'web', auth: false, tags: 'steam,gaming', rating: 4.7, count: 15 },
+        { name: 'Xbox Gamertag', url: 'https://xboxgamertag.com', desc: 'Xbox Live gamertag lookup', cost: 'freemium', access: 'web', auth: false, tags: 'xbox,gaming', rating: 4.0, count: 5 },
+    ],
+    'email-search': [
+        { name: 'Hunter.io', url: 'https://hunter.io', desc: 'Email finder by domain', cost: 'freemium', access: 'web', auth: true, tags: 'email,finder', rating: 4.6, count: 18 },
+        { name: 'EmailRep', url: 'https://emailrep.io', desc: 'Email reputation and footprint', cost: 'free', access: 'api', auth: false, tags: 'email,reputation', rating: 4.3, count: 7 },
+        { name: 'HaveIBeenPwned', url: 'https://haveibeenpwned.com', desc: 'Check email in breach databases', cost: 'free', access: 'web', auth: true, tags: 'email,breach', rating: 4.9, count: 32 },
+        { name: 'Snov.io', url: 'https://snov.io', desc: 'Email finder and verifier', cost: 'freemium', access: 'web', auth: true, tags: 'email,finder', rating: 4.1, count: 6 },
+    ],
+    'email-breach': [
+        { name: 'HaveIBeenPwned', url: 'https://haveibeenpwned.com', desc: 'Email breach check', cost: 'free', access: 'web', auth: true, tags: 'email,breach', rating: 4.9, count: 32 },
+        { name: 'Dehashed', url: 'https://dehashed.com', desc: 'Searchable breach database', cost: 'paid', access: 'web', auth: true, tags: 'breach,leaks', rating: 4.4, count: 11 },
+        { name: 'LeakCheck', url: 'https://leakcheck.io', desc: 'Breach data search', cost: 'freemium', access: 'web', auth: true, tags: 'breach,leaks', rating: 4.0, count: 5 },
+        { name: 'IntelX', url: 'https://intelx.io', desc: 'Pastebin, dark web and leak search', cost: 'freemium', access: 'web', auth: true, tags: 'breach,darkweb', rating: 4.3, count: 8 },
+    ],
+    'email-verify': [
+        { name: 'ZeroBounce', url: 'https://zerobounce.net', desc: 'Email validation and verification', cost: 'freemium', access: 'web', auth: true, tags: 'email,verify', rating: 4.4, count: 6 },
+        { name: 'NeverBounce', url: 'https://neverbounce.com', desc: 'Email verification API', cost: 'freemium', access: 'api', auth: true, tags: 'email,verify', rating: 4.5, count: 4 },
+    ],
+    'domain-whois': [
+        { name: 'WHOIS.net', url: 'https://whois.net', desc: 'Domain WHOIS lookup', cost: 'free', access: 'web', auth: false, tags: 'whois,domain', rating: 4.2, count: 9 },
+        { name: 'DomainTools WHOIS', url: 'https://whois.domaintools.com', desc: 'Comprehensive WHOIS data', cost: 'freemium', access: 'web', auth: false, tags: 'whois,domain', rating: 4.5, count: 12 },
+        { name: 'ICANN Lookup', url: 'https://lookup.icann.org', desc: 'Official ICANN WHOIS lookup', cost: 'free', access: 'web', auth: false, tags: 'whois,icann', rating: 4.6, count: 7 },
+        { name: 'WhoisXML', url: 'https://www.whoisxmlapi.com', desc: 'WHOIS API and data feeds', cost: 'freemium', access: 'api', auth: true, tags: 'whois,api', rating: 4.3, count: 5 },
+    ],
+    'domain-dns': [
+        { name: 'DNSDumpster', url: 'https://dnsdumpster.com', desc: 'DNS recon and mapping', cost: 'free', access: 'web', auth: false, tags: 'dns,recon', rating: 4.7, count: 15 },
+        { name: 'SecurityTrails', url: 'https://securitytrails.com', desc: 'DNS history and subdomain discovery', cost: 'freemium', access: 'web', auth: true, tags: 'dns,history', rating: 4.6, count: 10 },
+        { name: 'MXToolbox', url: 'https://mxtoolbox.com', desc: 'MX, DNS, and email diagnostic tools', cost: 'freemium', access: 'web', auth: false, tags: 'dns,mx,email', rating: 4.4, count: 8 },
+        { name: 'DNSlytics', url: 'https://dnslytics.com', desc: 'DNS analytics and reverse DNS', cost: 'freemium', access: 'web', auth: false, tags: 'dns,analytics', rating: 4.2, count: 6 },
+    ],
+    'domain-subdomains': [
+        { name: 'Subfinder', url: 'https://github.com/projectdiscovery/subfinder', desc: 'Subdomain discovery tool', cost: 'free', access: 'software', auth: false, tags: 'subdomain,enum', rating: 4.7, count: 11 },
+        { name: 'Amass', url: 'https://github.com/owasp-amass/amass', desc: 'In-depth subdomain enumeration', cost: 'free', access: 'software', auth: false, tags: 'subdomain,enum', rating: 4.6, count: 9 },
+        { name: 'crt.sh', url: 'https://crt.sh', desc: 'Certificate transparency log search', cost: 'free', access: 'web', auth: false, tags: 'subdomain,ct', rating: 4.8, count: 18 },
+        { name: 'Shodan', url: 'https://shodan.io', desc: 'Search engine for internet devices', cost: 'freemium', access: 'web', auth: true, tags: 'subdomain,scan', rating: 4.9, count: 28 },
+    ],
+    'domain-cert': [
+        { name: 'crt.sh', url: 'https://crt.sh', desc: 'Certificate transparency search', cost: 'free', access: 'web', auth: false, tags: 'cert,ct', rating: 4.8, count: 18 },
+        { name: 'Censys Certs', url: 'https://search.censys.io/certificates', desc: 'Certificate search engine', cost: 'freemium', access: 'web', auth: true, tags: 'cert,search', rating: 4.5, count: 7 },
+    ],
+    'domain-archive': [
+        { name: 'Wayback Machine', url: 'https://web.archive.org', desc: 'Internet Archive web snapshots', cost: 'free', access: 'web', auth: false, tags: 'archive,history', rating: 4.9, count: 35 },
+        { name: 'Archive.today', url: 'https://archive.ph', desc: 'Web page snapshot archive', cost: 'free', access: 'web', auth: false, tags: 'archive,snapshot', rating: 4.6, count: 14 },
+    ],
+    'ip-geo': [
+        { name: 'IPInfo.io', url: 'https://ipinfo.io', desc: 'IP geolocation and ASN data', cost: 'freemium', access: 'api', auth: false, tags: 'ip,geo', rating: 4.7, count: 16 },
+        { name: 'MaxMind GeoLite2', url: 'https://dev.maxmind.com/geoip/geolite2-free-geolocation-data', desc: 'Free IP geolocation database', cost: 'free', access: 'api', auth: true, tags: 'ip,geo,database', rating: 4.6, count: 12 },
+        { name: 'IPAPI.co', url: 'https://ipapi.co', desc: 'IP location API', cost: 'freemium', access: 'api', auth: false, tags: 'ip,geo', rating: 4.3, count: 8 },
+        { name: 'DB-IP', url: 'https://db-ip.com', desc: 'IP geolocation database and API', cost: 'freemium', access: 'api', auth: false, tags: 'ip,geo', rating: 4.4, count: 7 },
+    ],
+    'ip-reputation': [
+        { name: 'AbuseIPDB', url: 'https://www.abuseipdb.com', desc: 'IP abuse reports database', cost: 'freemium', access: 'api', auth: true, tags: 'ip,reputation', rating: 4.7, count: 14 },
+        { name: 'VirusTotal', url: 'https://www.virustotal.com', desc: 'IP, domain, file reputation', cost: 'freemium', access: 'web', auth: true, tags: 'reputation,malware', rating: 4.8, count: 25 },
+        { name: 'AlienVault OTX', url: 'https://otx.alienvault.com', desc: 'Threat intel community', cost: 'free', access: 'api', auth: true, tags: 'threat,intel', rating: 4.5, count: 9 },
+        { name: 'GreyNoise', url: 'https://www.greynoise.io', desc: 'Internet scanner intelligence', cost: 'freemium', access: 'api', auth: true, tags: 'scanner,intel', rating: 4.6, count: 7 },
+    ],
+    'ip-asn': [
+        { name: 'BGP.he.net', url: 'https://bgp.he.net', desc: 'BGP and ASN search', cost: 'free', access: 'web', auth: false, tags: 'asn,bgp', rating: 4.7, count: 13 },
+        { name: 'RIPEstat', url: 'https://stat.ripe.net', desc: 'RIPE routing data', cost: 'free', access: 'web', auth: false, tags: 'asn,ripe', rating: 4.4, count: 8 },
+        { name: 'PeeringDB', url: 'https://www.peeringdb.com', desc: 'Network peering database', cost: 'free', access: 'web', auth: false, tags: 'asn,peering', rating: 4.5, count: 6 },
+    ],
+    'phone-caller': [
+        { name: 'Truecaller', url: 'https://www.truecaller.com', desc: 'Caller ID and spam detection', cost: 'freemium', access: 'web', auth: true, tags: 'phone,caller', rating: 4.4, count: 12 },
+        { name: 'Whitepages', url: 'https://www.whitepages.com', desc: 'Reverse phone lookup', cost: 'freemium', access: 'web', auth: true, tags: 'phone,reverse', rating: 4.0, count: 7 },
+        { name: 'SpyDialer', url: 'https://www.spydialer.com', desc: 'Free reverse phone lookup', cost: 'freemium', access: 'web', auth: false, tags: 'phone,reverse', rating: 3.9, count: 5 },
+    ],
+    'phone-carrier': [
+        { name: 'CarrierLookup', url: 'https://www.carrierlookup.com', desc: 'Phone carrier lookup', cost: 'freemium', access: 'api', auth: true, tags: 'phone,carrier', rating: 4.1, count: 4 },
+        { name: 'Twilio Lookup', url: 'https://www.twilio.com/lookup', desc: 'Phone number carrier lookup API', cost: 'paid', access: 'api', auth: true, tags: 'phone,carrier', rating: 4.6, count: 8 },
+    ],
+    'people-search': [
+        { name: 'Pipl', url: 'https://pipl.com', desc: 'People search engine', cost: 'paid', access: 'web', auth: true, tags: 'people,search', rating: 4.3, count: 10 },
+        { name: 'Spokeo', url: 'https://www.spokeo.com', desc: 'People search aggregator', cost: 'freemium', access: 'web', auth: true, tags: 'people,search', rating: 4.0, count: 8 },
+        { name: 'BeenVerified', url: 'https://www.beenverified.com', desc: 'Background check and people search', cost: 'paid', access: 'web', auth: true, tags: 'people,background', rating: 4.1, count: 9 },
+        { name: 'ThatsThem', url: 'https://thatsthem.com', desc: 'Free people search', cost: 'free', access: 'web', auth: false, tags: 'people,search', rating: 4.2, count: 6 },
+    ],
+    'people-records': [
+        { name: 'FamilySearch', url: 'https://www.familysearch.org', desc: 'Genealogy and historical records', cost: 'free', access: 'web', auth: true, tags: 'genealogy,records', rating: 4.7, count: 15 },
+        { name: 'VoterRecords', url: 'https://voterrecords.com', desc: 'US voter registration records', cost: 'free', access: 'web', auth: false, tags: 'voter,records', rating: 4.3, count: 7 },
+    ],
+    'people-court': [
+        { name: 'PACER', url: 'https://pacer.uscourts.gov', desc: 'US federal court records', cost: 'paid', access: 'web', auth: true, tags: 'court,federal', rating: 4.2, count: 6 },
+        { name: 'CourtListener', url: 'https://www.courtlistener.com', desc: 'Free court opinion search', cost: 'free', access: 'web', auth: false, tags: 'court,cases', rating: 4.4, count: 5 },
+    ],
+    'people-genealogy': [
+        { name: 'Ancestry.com', url: 'https://www.ancestry.com', desc: 'Family history records', cost: 'paid', access: 'web', auth: true, tags: 'genealogy,family', rating: 4.6, count: 18 },
+        { name: 'MyHeritage', url: 'https://www.myheritage.com', desc: 'Family tree and records', cost: 'freemium', access: 'web', auth: true, tags: 'genealogy,family', rating: 4.4, count: 12 },
+        { name: 'FindAGrave', url: 'https://www.findagrave.com', desc: 'Grave records and memorials', cost: 'free', access: 'web', auth: true, tags: 'grave,records', rating: 4.5, count: 9 },
+    ],
+    'image-reverse': [
+        { name: 'Google Images', url: 'https://images.google.com', desc: 'Reverse image search', cost: 'free', access: 'web', auth: false, tags: 'reverse,image', rating: 4.7, count: 22 },
+        { name: 'TinEye', url: 'https://tineye.com', desc: 'Reverse image search engine', cost: 'freemium', access: 'web', auth: false, tags: 'reverse,image', rating: 4.6, count: 14 },
+        { name: 'Yandex Images', url: 'https://yandex.com/images', desc: 'Russian reverse image search', cost: 'free', access: 'web', auth: false, tags: 'reverse,image', rating: 4.5, count: 11 },
+        { name: 'PimEyes', url: 'https://pimeyes.com', desc: 'Facial recognition reverse search', cost: 'paid', access: 'web', auth: true, tags: 'reverse,face', rating: 4.3, count: 8 },
+    ],
+    'image-exif': [
+        { name: "Jeffrey's EXIF Viewer", url: 'http://exif.regex.info', desc: 'Online EXIF viewer', cost: 'free', access: 'web', auth: false, tags: 'exif,metadata', rating: 4.4, count: 6 },
+        { name: 'ExifTool', url: 'https://exiftool.org', desc: 'Comprehensive EXIF tool', cost: 'free', access: 'software', auth: false, tags: 'exif,metadata', rating: 4.8, count: 13 },
+    ],
+    'image-facial': [
+        { name: 'PimEyes', url: 'https://pimeyes.com', desc: 'Facial recognition search', cost: 'paid', access: 'web', auth: true, tags: 'face,recognition', rating: 4.3, count: 8 },
+        { name: 'Search4faces', url: 'https://search4faces.com', desc: 'Face search across VK/OK', cost: 'freemium', access: 'web', auth: false, tags: 'face,recognition', rating: 4.0, count: 5 },
+        { name: 'FaceCheck.ID', url: 'https://facecheck.id', desc: 'Reverse face search', cost: 'freemium', access: 'web', auth: true, tags: 'face,recognition', rating: 4.2, count: 6 },
+    ],
+    'social-twitter': [
+        { name: 'TweetDeck', url: 'https://tweetdeck.twitter.com', desc: 'Twitter dashboard', cost: 'free', access: 'web', auth: true, tags: 'twitter,dashboard', rating: 4.5, count: 14 },
+        { name: 'Twint', url: 'https://github.com/twintproject/twint', desc: 'Twitter intelligence tool', cost: 'free', access: 'software', auth: false, tags: 'twitter,scrape', rating: 4.6, count: 11 },
+        { name: 'SocialBlade', url: 'https://socialblade.com/twitter', desc: 'Twitter statistics', cost: 'free', access: 'web', auth: false, tags: 'twitter,stats', rating: 4.3, count: 8 },
+    ],
+    'social-facebook': [
+        { name: 'Facebook Search', url: 'https://www.facebook.com/search', desc: 'Facebook people and pages search', cost: 'free', access: 'web', auth: true, tags: 'facebook,search', rating: 4.0, count: 9 },
+        { name: 'Lookup-ID', url: 'https://lookup-id.com', desc: 'Find Facebook numeric ID', cost: 'free', access: 'web', auth: false, tags: 'facebook,id', rating: 4.2, count: 5 },
+    ],
+    'social-instagram': [
+        { name: 'Instaloader', url: 'https://instaloader.github.io', desc: 'Instagram scraping tool', cost: 'free', access: 'software', auth: false, tags: 'instagram,scrape', rating: 4.5, count: 10 },
+        { name: 'Picuki', url: 'https://www.picuki.com', desc: 'Instagram viewer without account', cost: 'free', access: 'web', auth: false, tags: 'instagram,viewer', rating: 4.1, count: 7 },
+        { name: 'ImgInn', url: 'https://imginn.com', desc: 'Instagram profile viewer', cost: 'free', access: 'web', auth: false, tags: 'instagram,viewer', rating: 4.0, count: 6 },
+    ],
+    'social-linkedin': [
+        { name: 'LinkedIn Search', url: 'https://www.linkedin.com/search', desc: 'LinkedIn people search', cost: 'freemium', access: 'web', auth: true, tags: 'linkedin,people', rating: 4.4, count: 12 },
+        { name: 'Lusha LinkedIn', url: 'https://lusha.com', desc: 'LinkedIn contact finder extension', cost: 'freemium', access: 'browser-ext', auth: true, tags: 'linkedin,extension', rating: 4.2, count: 7 },
+    ],
+    'social-reddit': [
+        { name: 'Reddit Search', url: 'https://www.reddit.com/search', desc: 'Reddit post and user search', cost: 'free', access: 'web', auth: false, tags: 'reddit,search', rating: 4.5, count: 11 },
+        { name: 'Reddit User Analyzer', url: 'https://reddituseranalyser.com', desc: 'Reddit user activity analysis', cost: 'free', access: 'web', auth: false, tags: 'reddit,user', rating: 4.3, count: 6 },
+        { name: 'Pushshift', url: 'https://pushshift.io', desc: 'Reddit API for historical data', cost: 'free', access: 'api', auth: false, tags: 'reddit,api', rating: 4.6, count: 9 },
+    ],
+    'se-general': [
+        { name: 'Google', url: 'https://www.google.com', desc: 'Google search', cost: 'free', access: 'web', auth: false, tags: 'search,google', rating: 4.9, count: 45 },
+        { name: 'Bing', url: 'https://www.bing.com', desc: 'Microsoft Bing search', cost: 'free', access: 'web', auth: false, tags: 'search,bing', rating: 4.3, count: 14 },
+        { name: 'DuckDuckGo', url: 'https://duckduckgo.com', desc: 'Privacy-focused search engine', cost: 'free', access: 'web', auth: false, tags: 'search,privacy', rating: 4.6, count: 18 },
+        { name: 'Yandex', url: 'https://yandex.com', desc: 'Russian search engine', cost: 'free', access: 'web', auth: false, tags: 'search,russia', rating: 4.2, count: 9 },
+        { name: 'Brave Search', url: 'https://search.brave.com', desc: 'Independent search index', cost: 'free', access: 'web', auth: false, tags: 'search,privacy', rating: 4.4, count: 7 },
+    ],
+    'se-privacy': [
+        { name: 'DuckDuckGo', url: 'https://duckduckgo.com', desc: 'Privacy-focused search', cost: 'free', access: 'web', auth: false, tags: 'search,privacy', rating: 4.6, count: 18 },
+        { name: 'Startpage', url: 'https://www.startpage.com', desc: 'Private Google results', cost: 'free', access: 'web', auth: false, tags: 'search,privacy', rating: 4.4, count: 11 },
+        { name: 'SearXNG', url: 'https://searx.be', desc: 'Open-source meta search engine', cost: 'free', access: 'web', auth: false, tags: 'search,open-source', rating: 4.5, count: 8 },
+    ],
+    'se-code': [
+        { name: 'GitHub Search', url: 'https://github.com/search', desc: 'Search GitHub repositories and code', cost: 'free', access: 'web', auth: false, tags: 'code,github', rating: 4.8, count: 28 },
+        { name: 'Grep.app', url: 'https://grep.app', desc: 'Search across public GitHub repos', cost: 'free', access: 'web', auth: false, tags: 'code,search', rating: 4.6, count: 12 },
+        { name: 'Sourcegraph', url: 'https://sourcegraph.com', desc: 'Code search engine', cost: 'freemium', access: 'web', auth: true, tags: 'code,search', rating: 4.5, count: 9 },
+    ],
+    'se-paste': [
+        { name: 'Pastebin Search', url: 'https://psbdmp.ws', desc: 'Pastebin dump search', cost: 'free', access: 'web', auth: false, tags: 'paste,leaks', rating: 4.0, count: 6 },
+        { name: 'PasteLert', url: 'https://pastebin.com/alerts', desc: 'Paste alert monitoring', cost: 'free', access: 'web', auth: true, tags: 'paste,monitor', rating: 4.1, count: 4 },
+    ],
+    'pr-voter': [
+        { name: 'VoterRecords', url: 'https://voterrecords.com', desc: 'US voter records search', cost: 'free', access: 'web', auth: false, tags: 'voter,records', rating: 4.3, count: 7 },
+    ],
+    'pr-business': [
+        { name: 'OpenCorporates', url: 'https://opencorporates.com', desc: 'Largest open corporate database', cost: 'freemium', access: 'web', auth: false, tags: 'business,registry', rating: 4.6, count: 11 },
+        { name: 'SEC EDGAR', url: 'https://www.sec.gov/edgar', desc: 'US public company filings', cost: 'free', access: 'web', auth: false, tags: 'business,sec', rating: 4.5, count: 9 },
+    ],
+    'biz-search': [
+        { name: 'OpenCorporates', url: 'https://opencorporates.com', desc: 'Open corporate database', cost: 'freemium', access: 'web', auth: false, tags: 'business,registry', rating: 4.6, count: 11 },
+        { name: 'Glassdoor', url: 'https://www.glassdoor.com', desc: 'Company reviews and salaries', cost: 'freemium', access: 'web', auth: true, tags: 'business,reviews', rating: 4.2, count: 8 },
+    ],
+    'biz-finance': [
+        { name: 'SEC EDGAR', url: 'https://www.sec.gov/edgar', desc: 'Public company filings', cost: 'free', access: 'web', auth: false, tags: 'finance,sec', rating: 4.5, count: 9 },
+        { name: 'Crunchbase', url: 'https://www.crunchbase.com', desc: 'Startup and company data', cost: 'freemium', access: 'web', auth: true, tags: 'finance,startup', rating: 4.4, count: 10 },
+    ],
+    'biz-patents': [
+        { name: 'Google Patents', url: 'https://patents.google.com', desc: 'Patent search engine', cost: 'free', access: 'web', auth: false, tags: 'patent,search', rating: 4.6, count: 12 },
+        { name: 'USPTO', url: 'https://uspto.gov', desc: 'US patent office search', cost: 'free', access: 'web', auth: false, tags: 'patent,uspto', rating: 4.4, count: 7 },
+    ],
+    'veh-plate': [
+        { name: 'WorldLicensePlates', url: 'http://www.worldlicenseplates.com', desc: 'Worldwide plate directory', cost: 'free', access: 'web', auth: false, tags: 'plate,directory', rating: 4.0, count: 4 },
+        { name: 'Plate Recognizer', url: 'https://platerecognizer.com', desc: 'License plate recognition API', cost: 'freemium', access: 'api', auth: true, tags: 'plate,api', rating: 4.3, count: 5 },
+    ],
+    'veh-vin': [
+        { name: 'VINcheck', url: 'https://www.vehiclehistory.gov', desc: 'National VIN check (free)', cost: 'free', access: 'web', auth: false, tags: 'vin,history', rating: 4.4, count: 8 },
+        { name: 'Carfax', url: 'https://www.carfax.com', desc: 'Vehicle history reports', cost: 'paid', access: 'web', auth: true, tags: 'vin,history', rating: 4.5, count: 11 },
+    ],
+    'geo-sat': [
+        { name: 'Google Earth', url: 'https://earth.google.com', desc: '3D Earth visualization', cost: 'free', access: 'web', auth: false, tags: 'satellite,3d', rating: 4.8, count: 24 },
+        { name: 'Sentinel Hub', url: 'https://www.sentinel-hub.com', desc: 'Satellite imagery from Copernicus', cost: 'freemium', access: 'web', auth: true, tags: 'satellite,copernicus', rating: 4.5, count: 9 },
+        { name: 'NASA Worldview', url: 'https://worldview.earthdata.nasa.gov', desc: 'NASA satellite imagery', cost: 'free', access: 'web', auth: false, tags: 'satellite,nasa', rating: 4.6, count: 7 },
+    ],
+    'geo-street': [
+        { name: 'Google Street View', url: 'https://www.google.com/streetview', desc: 'Google street level imagery', cost: 'free', access: 'web', auth: false, tags: 'street,google', rating: 4.8, count: 22 },
+        { name: 'Mapillary', url: 'https://www.mapillary.com', desc: 'Crowdsourced street imagery', cost: 'freemium', access: 'web', auth: false, tags: 'street,crowd', rating: 4.3, count: 8 },
+    ],
+    'net-ports': [
+        { name: 'Shodan', url: 'https://www.shodan.io', desc: 'Internet device scanner', cost: 'freemium', access: 'web', auth: true, tags: 'port,scan', rating: 4.9, count: 28 },
+        { name: 'Censys', url: 'https://censys.io', desc: 'Internet-wide scanner', cost: 'freemium', access: 'web', auth: true, tags: 'port,scan', rating: 4.6, count: 14 },
+        { name: 'ZoomEye', url: 'https://www.zoomeye.org', desc: 'Chinese cyberspace search', cost: 'freemium', access: 'web', auth: true, tags: 'port,scan', rating: 4.2, count: 6 },
+    ],
+    'net-tech': [
+        { name: 'Wappalyzer', url: 'https://www.wappalyzer.com', desc: 'Website tech stack fingerprint', cost: 'freemium', access: 'browser-ext', auth: false, tags: 'tech,fingerprint', rating: 4.6, count: 13 },
+        { name: 'BuiltWith', url: 'https://builtwith.com', desc: 'Website tech profile', cost: 'freemium', access: 'web', auth: false, tags: 'tech,fingerprint', rating: 4.4, count: 10 },
+    ],
+    'net-ssl': [
+        { name: 'SSL Labs', url: 'https://www.ssllabs.com/ssltest', desc: 'SSL/TLS configuration test', cost: 'free', access: 'web', auth: false, tags: 'ssl,test', rating: 4.7, count: 14 },
+        { name: 'Censys Certs', url: 'https://search.censys.io/certificates', desc: 'Certificate search', cost: 'freemium', access: 'web', auth: true, tags: 'ssl,search', rating: 4.5, count: 7 },
+    ],
+    'crypto-btc': [
+        { name: 'Blockchain.com Explorer', url: 'https://www.blockchain.com/explorer', desc: 'Bitcoin blockchain explorer', cost: 'free', access: 'web', auth: false, tags: 'btc,explorer', rating: 4.7, count: 16 },
+        { name: 'Blockchair', url: 'https://blockchair.com', desc: 'Multi-blockchain explorer', cost: 'free', access: 'web', auth: false, tags: 'btc,explorer', rating: 4.6, count: 12 },
+        { name: 'OXT', url: 'https://oxt.me', desc: 'Bitcoin transaction graph explorer', cost: 'free', access: 'web', auth: false, tags: 'btc,graph', rating: 4.3, count: 6 },
+    ],
+    'crypto-eth': [
+        { name: 'Etherscan', url: 'https://etherscan.io', desc: 'Ethereum blockchain explorer', cost: 'free', access: 'web', auth: false, tags: 'eth,explorer', rating: 4.8, count: 19 },
+        { name: 'Ethplorer', url: 'https://ethplorer.io', desc: 'Ethereum tokens and addresses', cost: 'freemium', access: 'api', auth: false, tags: 'eth,tokens', rating: 4.4, count: 8 },
+    ],
+    'br-db': [
+        { name: 'HaveIBeenPwned', url: 'https://haveibeenpwned.com', desc: 'Email breach check', cost: 'free', access: 'web', auth: true, tags: 'breach,email', rating: 4.9, count: 32 },
+        { name: 'Dehashed', url: 'https://dehashed.com', desc: 'Searchable breach database', cost: 'paid', access: 'web', auth: true, tags: 'breach,leaks', rating: 4.4, count: 11 },
+        { name: 'IntelX', url: 'https://intelx.io', desc: 'Leaks and dark web search', cost: 'freemium', access: 'web', auth: true, tags: 'breach,darkweb', rating: 4.3, count: 8 },
+    ],
+    'br-darkweb': [
+        { name: 'IntelX', url: 'https://intelx.io', desc: 'Dark web mention search', cost: 'freemium', access: 'web', auth: true, tags: 'darkweb,search', rating: 4.3, count: 8 },
+        { name: 'Ahmia', url: 'https://ahmia.fi', desc: 'Tor hidden service search', cost: 'free', access: 'web', auth: false, tags: 'darkweb,tor', rating: 4.2, count: 6 },
+    ],
+};
+
+// Compute category tool counts
+function computeCounts() {
+    const count = {};
+    for (const slug in TOOLS) count[slug] = TOOLS[slug].length;
+    for (const cat of CATEGORIES) {
+        let total = 0;
+        for (const sub of cat.children) total += count[sub.slug] || 0;
+        cat.tool_count = total;
+        for (const sub of cat.children) sub.tool_count = count[sub.slug] || 0;
+    }
+}
+computeCounts();
+
+// ============ Theme ============
+const THEME_KEY = 'osint-theme';
+function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.className = t === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+    document.cookie = `theme=${t}; path=/; max-age=${365 * 24 * 3600}`;
+    localStorage.setItem(THEME_KEY, t);
+}
+applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+});
+
+// ============ Render tree ============
+function renderTree(parent_slug) {
+    const root = document.getElementById('tree-root');
+    let html = '';
+    for (const cat of CATEGORIES) {
+        const isActive = parent_slug === cat.slug;
+        html += `<li class="tree-node ${isActive ? 'active' : ''}" data-slug="${cat.slug}">
+            <div class="tree-label">
+                <i class="fas fa-chevron-right tree-toggle"></i>
+                <a href="#" onclick="selectCategory('${cat.slug}');return false">
+                    <i class="bi bi-${cat.icon}"></i>
+                    ${cat.name}
+                    <span class="tree-count">${cat.tool_count}</span>
+                </a>
+            </div>
+            <ul class="tree-children" style="display:${isActive ? 'block' : 'none'}">`;
+        for (const sub of cat.children) {
+            const subActive = parent_slug === sub.slug;
+            html += `<li class="tree-node ${subActive ? 'active' : ''}" data-slug="${sub.slug}">
+                <div class="tree-label" style="padding-left: 22px">
+                    <i class="fas fa-circle tree-bullet"></i>
+                    <a href="#" onclick="selectCategory('${sub.slug}');return false">
+                        <i class="bi bi-${sub.icon}"></i>
+                        ${sub.name}
+                        <span class="tree-count">${sub.tool_count}</span>
+                    </a>
+                </div>
+            </li>`;
+        }
+        html += `</ul></li>`;
+    }
+    root.innerHTML = html;
+
+    // Wire up toggles
+    document.querySelectorAll('.tree-toggle').forEach(t => {
+        t.addEventListener('click', e => {
+            e.preventDefault(); e.stopPropagation();
+            const node = t.closest('.tree-node');
+            const children = node.querySelector('.tree-children');
+            if (children) {
+                const visible = children.style.display !== 'none';
+                children.style.display = visible ? 'none' : 'block';
+                node.classList.toggle('expanded', !visible);
+            }
+        });
+    });
+
+    // Auto-expand active parent
+    const active = document.querySelector('.tree-node.active');
+    if (active) {
+        let p = active.parentElement;
+        while (p && p.id !== 'tree-root') {
+            if (p.classList.contains('tree-children')) {
+                p.style.display = 'block';
+                p.closest('.tree-node')?.classList.add('expanded');
+            }
+            p = p.parentElement;
+        }
+    }
+}
+
+document.getElementById('expand-all').addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(c => c.style.display = 'block');
+    document.querySelectorAll('.tree-node').forEach(n => n.classList.add('expanded'));
+});
+document.getElementById('collapse-all').addEventListener('click', () => {
+    document.querySelectorAll('.tree-children').forEach(c => c.style.display = 'none');
+    document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('expanded'));
+});
+
+// ============ Render content ============
+function costBadge(type) {
+    const map = { free: ['success', 'Free'], freemium: ['info', 'Freemium'], paid: ['danger', 'Paid'] };
+    const [c, l] = map[type] || ['secondary', type];
+    return `<span class="badge bg-${c}">${l}</span>`;
+}
+function accessBadge(type) {
+    const map = { web: ['primary', 'Web'], api: ['warning', 'API'], software: ['dark', 'Software'], 'browser-ext': ['info', 'Ext'] };
+    const [c, l] = map[type] || ['secondary', type];
+    return `<span class="badge bg-${c}">${l}</span>`;
+}
+function stars(avg) {
+    let html = '<span class="stars">';
+    for (let i = 1; i <= 5; i++) {
+        if (avg >= i) html += '<i class="fas fa-star"></i>';
+        else if (avg >= i - 0.5) html += '<i class="fas fa-star-half-alt"></i>';
+        else html += '<i class="far fa-star"></i>';
+    }
+    return html + '</span>';
+}
+function faviconUrl(url) {
+    try {
+        const host = new URL(url).host;
+        return `https://www.google.com/s2/favicons?domain=${host}`;
+    } catch (e) {
+        return '';
+    }
+}
+function renderToolCard(t) {
+    return `<div class="col-md-6 col-lg-4 tool-card-wrapper">
+        <div class="card tool-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="tool-icon">
+                        <img src="${faviconUrl(t.url)}" alt="" width="24" height="24" onerror="this.style.visibility='hidden'">
+                    </div>
+                    <button class="btn btn-sm btn-fav" onclick="toggleFav(this, '${t.name}')" title="Login required in full app">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+                <h6 class="card-title tool-name">
+                    <a href="${t.url}" target="_blank" rel="noopener" class="text-decoration-none">
+                        ${t.name} <i class="fas fa-external-link-alt small"></i>
+                    </a>
+                </h6>
+                <p class="card-text tool-desc">${t.desc}</p>
+                <div class="tool-meta">
+                    ${costBadge(t.cost)}
+                    ${accessBadge(t.access)}
+                    ${t.auth ? '<span class="badge bg-secondary" title="Requires account"><i class="fas fa-user-lock"></i></span>' : ''}
+                </div>
+                <div class="tool-footer">
+                    <span class="tool-rating">
+                        ${stars(t.rating)}
+                        <small class="text-muted">(${t.count})</small>
+                    </span>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="alert('In the full PHP app, this opens the tool detail page with reviews.')">Details</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
+function renderHome() {
+    document.getElementById('hero-area').style.display = '';
+    document.getElementById('category-header').style.display = 'none';
+    document.getElementById('search-results').style.display = 'none';
+    let html = '';
+    for (const cat of CATEGORIES) {
+        html += `<div class="col-md-6 col-lg-4">
+            <a class="card category-card h-100" href="#" onclick="selectCategory('${cat.slug}');return false">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-${cat.icon}"></i>
+                        ${cat.name}
+                    </h5>
+                    <p class="card-text small text-muted">${cat.desc}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-secondary">${cat.tool_count} tools</span>
+                        <span class="text-primary small">Browse →</span>
+                    </div>
+                </div>
+            </a>
+        </div>`;
+    }
+    document.getElementById('content-area').innerHTML = html;
+}
+
+function selectCategory(slug) {
+    // Find category or subcategory
+    let cat = null, isRoot = false;
+    for (const c of CATEGORIES) {
+        if (c.slug === slug) { cat = c; isRoot = true; break; }
+        for (const sub of c.children) {
+            if (sub.slug === slug) { cat = sub; break; }
+        }
+    }
+    if (!cat) return;
+
+    document.getElementById('hero-area').style.display = 'none';
+    document.getElementById('category-header').style.display = '';
+    document.getElementById('search-results').style.display = 'none';
+    document.getElementById('cat-title').innerHTML = `<i class="bi bi-${cat.icon}"></i> ${cat.name}`;
+    document.getElementById('cat-desc').textContent = cat.desc || '';
+
+    // Gather tools (for root categories, include all subcategories)
+    let tools = [];
+    if (isRoot) {
+        for (const sub of cat.children) {
+            tools = tools.concat(TOOLS[sub.slug] || []);
+        }
+    } else {
+        tools = TOOLS[slug] || [];
+    }
+
+    if (tools.length === 0) {
+        document.getElementById('content-area').innerHTML = `
+            <div class="empty-state col-12">
+                <i class="fas fa-folder-open"></i>
+                <h4>No tools in this category yet</h4>
+                <p>Use the admin panel to add tools here.</p>
+            </div>`;
+    } else {
+        document.getElementById('content-area').innerHTML = tools.map(renderToolCard).join('');
+    }
+
+    renderTree(slug);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showHome() {
+    renderHome();
+    renderTree(null);
+    document.getElementById('global-search').value = '';
+}
+
+function doSearch(e) {
+    e.preventDefault();
+    const q = document.getElementById('global-search').value.trim().toLowerCase();
+    if (!q) return;
+
+    const results = [];
+    for (const slug in TOOLS) {
+        for (const t of TOOLS[slug]) {
+            if (t.name.toLowerCase().includes(q) ||
+                t.desc.toLowerCase().includes(q) ||
+                t.tags.toLowerCase().includes(q)) {
+                results.push(t);
+            }
+        }
+    }
+
+    document.getElementById('hero-area').style.display = 'none';
+    document.getElementById('category-header').style.display = 'none';
+    document.getElementById('search-results').style.display = '';
+    document.getElementById('search-count').textContent = results.length;
+    document.getElementById('search-query').textContent = q;
+
+    if (results.length === 0) {
+        document.getElementById('content-area').innerHTML = `
+            <div class="empty-state col-12">
+                <i class="fas fa-search"></i>
+                <h4>No tools found</h4>
+                <p>Try a different search term.</p>
+            </div>`;
+    } else {
+        document.getElementById('content-area').innerHTML = results.map(renderToolCard).join('');
+    }
+}
+
+function toggleFav(btn, name) {
+    btn.classList.toggle('active');
+    showToast(btn.classList.contains('active') ? `Bookmarked "${name}" (demo only)` : `Removed "${name}" from favorites (demo only)`);
+}
+
+function setView(view, btn) {
+    document.querySelectorAll('.view-toggle .btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const sidebar = document.getElementById('sidebar-tree');
+    if (view === 'grid') {
+        sidebar.classList.add('d-none');
+        document.getElementById('main-content').className = 'col-12';
+    } else if (view === 'tree') {
+        sidebar.classList.remove('d-none');
+        sidebar.className = 'col-12 d-block';
+        document.getElementById('main-content').style.display = 'none';
+    } else {
+        sidebar.classList.remove('d-none');
+        sidebar.className = 'col-lg-3 col-md-4 d-none d-md-block';
+        document.getElementById('main-content').style.display = '';
+        document.getElementById('main-content').className = 'col-lg-9 col-md-8';
+    }
+}
+
+function showToast(msg) {
+    const existing = document.querySelector('.app-toast');
+    if (existing) existing.remove();
+    const t = document.createElement('div');
+    t.className = 'app-toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transition = 'opacity 0.3s';
+        setTimeout(() => t.remove(), 300);
+    }, 2500);
+}
+
+// Initial render
+renderTree(null);
+renderHome();
+
+// Mobile tree modal — clone sidebar tree
+document.getElementById('mobileTreeModal').addEventListener('show.bs.modal', () => {
+    const clone = document.getElementById('tree-root').cloneNode(true);
+    clone.querySelectorAll('a').forEach(a => {
+        const onclick = a.getAttribute('onclick');
+        if (onclick) {
+            a.setAttribute('onclick', onclick + '; bootstrap.Modal.getInstance(document.getElementById("mobileTreeModal"))?.hide()');
+        }
+    });
+    document.getElementById('mobile-tree-container').innerHTML = '';
+    document.getElementById('mobile-tree-container').appendChild(clone);
+});
+</script>
+</body>
+</html>

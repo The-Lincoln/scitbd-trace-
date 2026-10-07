@@ -1,0 +1,408 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SCITBD AI CEO//Global Operational Framework//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:SCITBD AI CEO Operational Plan
+X-WR-TIMEZONE:Asia/Dhaka
+X-WR-CALDESC:24-hour autonomous operational cycle across 4 regional blocks
+  (BST).
+BEGIN:VTIMEZONE
+TZID:Asia/Dhaka
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0600
+TZOFFSETTO:+0600
+TZNAME:+06
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:1edc4c2f950f5536a4c7555bd7b7ac14@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T060000
+DTEND;TZID=Asia/Dhaka:20261004T070000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B1 06:00-07:00 SEO & Local Content Deploy
+DESCRIPTION:BLOCK: Block 1: 06:00 – 12:00 BST | South Asia & Domestic\nR
+ EGION: BD / South Asia\nFOCUS: SEO\, Local Tenders & BD Pipeline\n\nDETAI
+ LED TASKS:\nPublish 1 SEO-optimized blog post targeting keywords across S
+ CITBD's 17 strategic capabilities. Post morning updates across LinkedIn\,
+  Facebook\, and TikTok tailored for South Asian audiences.\n\nEXPECTED OU
+ TCOME:\nDrives organic search indexing\, captures early morning regional 
+ web traffic\, and increases brand visibility across Asian social platform
+ s.\n\nPRIORITY: HIGH\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: SEO & Local Content Deploy
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4ce815048dd85619b37789f55cc125ed@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T070000
+DTEND;TZID=Asia/Dhaka:20261004T090000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B1 07:00-09:00 Domestic & Regional RFP Scrapers
+DESCRIPTION:BLOCK: Block 1: 06:00 – 12:00 BST | South Asia & Domestic\nR
+ EGION: BD / South Asia\nFOCUS: SEO\, Local Tenders & BD Pipeline\n\nDETAI
+ LED TASKS:\nRun automated scrapers on government and enterprise procureme
+ nt portals in Bangladesh (e.g.\, e-GP system) and South Asia. Flag matchi
+ ng RFPs and initiate automated generation via the Proposal Factory (Task 
+ 7).\n\nEXPECTED OUTCOME:\nIdentifies new tender opportunities immediately
+  upon release and drafts custom bid proposals for fast submission.\n\nPRI
+ ORITY: CRITICAL\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,CRITICAL
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Domestic & Regional RFP Scrapers
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:58e3e05818bd508ca0051ce38323c65b@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T090000
+DTEND;TZID=Asia/Dhaka:20261004T110000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B1 09:00-11:00 BD Lead Nurturing & Pipeline
+DESCRIPTION:BLOCK: Block 1: 06:00 – 12:00 BST | South Asia & Domestic\nR
+ EGION: BD / South Asia\nFOCUS: SEO\, Local Tenders & BD Pipeline\n\nDETAI
+ LED TASKS:\nDeploy automated lead-nurturing email workflows (Touchpoints 
+ 1-3) and update CRM records for active South Asian accounts.\n\nEXPECTED 
+ OUTCOME:\nMoves warm regional prospects through the sales funnel and main
+ tains active client contact.\n\nPRIORITY: MEDIUM\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,MEDIUM
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: BD Lead Nurturing & Pipeline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:7b13a4d5e6d25669b20a29926e5146d2@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T110000
+DTEND;TZID=Asia/Dhaka:20261004T120000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B1 11:00-12:00 Brand SLA & Review Audit
+DESCRIPTION:BLOCK: Block 1: 06:00 – 12:00 BST | South Asia & Domestic\nR
+ EGION: BD / South Asia\nFOCUS: SEO\, Local Tenders & BD Pipeline\n\nDETAI
+ LED TASKS:\nMonitor Trustpilot\, Google My Business\, and local directory
+  listings. Auto-reply to positive feedback and escalate any rating under 
+ 40 or negative mention to the CEO queue within 1 hour.\n\nEXPECTED OUTCOM
+ E:\nProtects corporate reputation and ensures rapid resolution of client 
+ dissatisfaction.\n\nESCALATION:\nNegative review -> CEO queue within 1 ho
+ ur\; NPS < 40 -> emergency review meeting within 48 hours.\n\nPRIORITY: C
+ RITICAL\nCATEGORY: client
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:CLIENT,CRITICAL
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Brand SLA & Review Audit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:45594e6fb3a05093856ae743720920aa@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T120000
+DTEND;TZID=Asia/Dhaka:20261004T133000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B2 12:00-13:30 Ad Engine Performance Audit
+DESCRIPTION:BLOCK: Block 2: 12:00 – 18:00 BST | Middle East / EU\nREGION
+ : Middle East / EU\nFOCUS: ME & EU Sales Outreach & Ad Audits\n\nDETAILED
+  TASKS:\nAudit active Google Search Ads and LinkedIn Sponsored Content ru
+ nning in the UAE\, Saudi Arabia\, UK\, Germany\, and France. Auto-pause a
+ ny campaign showing negative ROAS for 3 consecutive days.\n\nEXPECTED OUT
+ COME:\nEliminates wasted ad spend and reallocates capital to high-convert
+ ing ad sets.\n\nESCALATION:\nNegative ROAS for 3 consecutive days -> auto
+ -pause campaign.\n\nPRIORITY: HIGH\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Ad Engine Performance Audit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1aeda84b2c7759c6a7452a8ea6d40696@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T133000
+DTEND;TZID=Asia/Dhaka:20261004T160000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B2 13:30-16:00 Middle East & European B2B Prospecting
+DESCRIPTION:BLOCK: Block 2: 12:00 – 18:00 BST | Middle East / EU\nREGION
+ : Middle East / EU\nFOCUS: ME & EU Sales Outreach & Ad Audits\n\nDETAILED
+  TASKS:\nIdentify and initiate contact with 10-12 CTOs/CIOs daily via Lin
+ kedIn Sales Navigator and cold email automation\, focusing on Custom ERP\
+ , Cloud Transformation\, and AI Solutions.\n\nEXPECTED OUTCOME:\nBuilds a
+  predictable\, high-value pipeline of European and Middle Eastern enterpr
+ ise leads.\n\nPRIORITY: HIGH\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Middle East & European B2B Prospecting
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cccad442ec175f62926274c51b4957d3@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T160000
+DTEND;TZID=Asia/Dhaka:20261004T173000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B2 16:00-17:30 European Content Engine Execution
+DESCRIPTION:BLOCK: Block 2: 12:00 – 18:00 BST | Middle East / EU\nREGION
+ : Middle East / EU\nFOCUS: ME & EU Sales Outreach & Ad Audits\n\nDETAILED
+  TASKS:\nPublish Blog Post #2 optimized for UK/EU search queries. Distrib
+ ute gated case studies and whitepapers for lead capture.\n\nEXPECTED OUTC
+ OME:\nExpands European organic search footprint and generates qualified l
+ ead downloads.\n\nPRIORITY: MEDIUM\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,MEDIUM
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: European Content Engine Execution
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:15bd95b6260e5f6d8eac92700c394439@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T173000
+DTEND;TZID=Asia/Dhaka:20261004T180000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B2 17:30-18:00 Retainer & Upsell Automations
+DESCRIPTION:BLOCK: Block 2: 12:00 – 18:00 BST | Middle East / EU\nREGION
+ : Middle East / EU\nFOCUS: ME & EU Sales Outreach & Ad Audits\n\nDETAILED
+  TASKS:\nDispatch automated upsell sequences to existing European clients
+  currently utilizing only 1-2 service lines.\n\nEXPECTED OUTCOME:\nMaximi
+ zes Client Lifetime Value (LTV) and converts single-project clients into 
+ monthly retainers.\n\nPRIORITY: MEDIUM\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,MEDIUM
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Retainer & Upsell Automations
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2424d79cfa5e5cebae8a88190f284cb7@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T180000
+DTEND;TZID=Asia/Dhaka:20261004T193000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B3 18:00-19:30 US Market Campaign Launch
+DESCRIPTION:BLOCK: Block 3: 18:00 – 00:00 BST | UK / US East Coast\nREGI
+ ON: UK / US East Coast\nFOCUS: North America Peak Launch & High-Value Dea
+ ls\n\nDETAILED TASKS:\nLaunch refreshed Facebook Carousel and LinkedIn ad
+  sets targeting US/Canadian SMEs and run A/B tests on SCITBD's AI Product
+  Suite.\n\nEXPECTED OUTCOME:\nEngages North American buyers at the start 
+ of their business day with high-converting trial offers.\n\nPRIORITY: HIG
+ H\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: US Market Campaign Launch
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c1a9d0a412075ca9be10781b19e03157@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T193000
+DTEND;TZID=Asia/Dhaka:20261004T220000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B3 19:30-22:00 High-Value Proposals & Direct Pipeline
+DESCRIPTION:BLOCK: Block 3: 18:00 – 00:00 BST | UK / US East Coast\nREGI
+ ON: UK / US East Coast\nFOCUS: North America Peak Launch & High-Value Dea
+ ls\n\nDETAILED TASKS:\nProcess incoming web inquiries from North America 
+ and the UK. Generate custom technical proposals within the sub-2-hour SLA
+  limit.\n\nEXPECTED OUTCOME:\nAchieves high conversion rates on high-tick
+ et enterprise contracts.\n\nESCALATION:\nESCALATION: Lead value >= $10\,0
+ 00 USD -> personalized CEO Video Proposal dispatched within 24 hours. All
+  inbound RFPs -> proposal returned in under 2 hours.\n\nPRIORITY: CRITICA
+ L\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,CRITICAL
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: High-Value Proposals & Direct Pipeline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0fc9cbca79bd5468bbf636bfd275b9be@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T220000
+DTEND;TZID=Asia/Dhaka:20261004T233000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B3 22:00-23:30 US Content & Video Engine
+DESCRIPTION:BLOCK: Block 3: 18:00 – 00:00 BST | UK / US East Coast\nREGI
+ ON: UK / US East Coast\nFOCUS: North America Peak Launch & High-Value Dea
+ ls\n\nDETAILED TASKS:\nPublish Blog Post #3 for North American search tra
+ ffic and distribute short-form video assets across TikTok\, Reels\, and Y
+ ouTube Shorts.\n\nEXPECTED OUTCOME:\nCaptures high-intent US search traff
+ ic and drives video view velocity toward the 10\,000 views/video mileston
+ e.\n\nPRIORITY: HIGH\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: US Content & Video Engine
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:e6e4f5812d09510ba575c9de95f76d46@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T233000
+DTEND;TZID=Asia/Dhaka:20261005T000000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B3 23:30-00:00 Client Support & System Health Audit
+DESCRIPTION:BLOCK: Block 3: 18:00 – 00:00 BST | UK / US East Coast\nREGI
+ ON: UK / US East Coast\nFOCUS: North America Peak Launch & High-Value Dea
+ ls\n\nDETAILED TASKS:\nVerify technical support response times to uphold 
+ the sub-2-hour SLA and audit live hosting setups for 99.9% uptime complia
+ nce.\n\nEXPECTED OUTCOME:\nMaintains service reliability and prevents cli
+ ent churn.\n\nESCALATION:\nSupport ticket -> under 2 hours. Uptime drop b
+ elow 99.9% -> instant operations engineering alert.\n\nPRIORITY: CRITICAL
+ \nCATEGORY: operations
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:OPERATIONS,CRITICAL
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Client Support & System Health Audit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fd59c1146a1a5f72883b986eb078c8da@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T000000
+DTEND;TZID=Asia/Dhaka:20261004T020000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B4 00:00-02:00 Daily Campaign Optimization
+DESCRIPTION:BLOCK: Block 4: 00:00 – 06:00 BST | US West / Oceania\nREGIO
+ N: US West / Oceania\nFOCUS: Night Analytics\, Oceania Launch & Reboot\n\
+ nDETAILED TASKS:\nAnalyze multi-channel marketing performance across Goog
+ le\, Meta\, LinkedIn\, and TikTok. Reallocate ad budgets dynamically to t
+ op performers.\n\nEXPECTED OUTCOME:\nMaximizes overall marketing ROAS acr
+ oss global channels.\n\nPRIORITY: HIGH\nCATEGORY: marketing
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:MARKETING,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Daily Campaign Optimization
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ab32cca441d658209d98136f33c26845@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T020000
+DTEND;TZID=Asia/Dhaka:20261004T040000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B4 02:00-04:00 Oceania Market Operations
+DESCRIPTION:BLOCK: Block 4: 00:00 – 06:00 BST | US West / Oceania\nREGIO
+ N: US West / Oceania\nFOCUS: Night Analytics\, Oceania Launch & Reboot\n\
+ nDETAILED TASKS:\nTrigger B2B outreach sequences targeting Australian SME
+ s as their business day opens and scan Australian tender databases.\n\nEX
+ PECTED OUTCOME:\nEstablishes early-mover advantage in the Australian and 
+ New Zealand commercial sectors.\n\nPRIORITY: HIGH\nCATEGORY: sales
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:SALES,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Oceania Market Operations
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:291642fe624159408ad27892bf377cc2@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T040000
+DTEND;TZID=Asia/Dhaka:20261004T053000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B4 04:00-05:30 Daily CEO Intelligence Summary
+DESCRIPTION:BLOCK: Block 4: 00:00 – 06:00 BST | US West / Oceania\nREGIO
+ N: US West / Oceania\nFOCUS: Night Analytics\, Oceania Launch & Reboot\n\
+ nDETAILED TASKS:\nCompile the Daily CEO Intelligence Briefing covering: (
+ 1) Daily Revenue Generated vs. Target ($1.5M Year-End Goal)\; (2) New Lea
+ ds Captured & Proposals Delivered\; (3) Ad ROAS\, Organic Traffic\, and S
+ ystem Uptime Metrics.\n\nEXPECTED OUTCOME:\nGives executive leadership re
+ al-time visibility into financial and operational progress.\n\nPRIORITY: 
+ CRITICAL\nCATEGORY: admin
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:ADMIN,CRITICAL
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: Daily CEO Intelligence Summary
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:9c59bb394cb75dc5b04f9173f7557d32@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;TZID=Asia/Dhaka:20261004T053000
+DTEND;TZID=Asia/Dhaka:20261004T060000
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD Ops] B4 05:30-06:00 System Flush & Reset
+DESCRIPTION:BLOCK: Block 4: 00:00 – 06:00 BST | US West / Oceania\nREGIO
+ N: US West / Oceania\nFOCUS: Night Analytics\, Oceania Launch & Reboot\n\
+ nDETAILED TASKS:\nClear system caches\, refresh automation queues\, and s
+ ynchronize workflows for the next 06:00 BST loop.\n\nEXPECTED OUTCOME:\nE
+ nsures zero system latency and continuous 24/7 autonomous execution.\n\nP
+ RIORITY: HIGH\nCATEGORY: operations
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+CATEGORIES:OPERATIONS,HIGH
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Starts in 15 min: System Flush & Reset
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fd047bfc50e55051a78f4909fb1b2494@scitbd.ceo
+DTSTAMP:20261004T134854Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+RRULE:FREQ=DAILY
+SUMMARY:[SCITBD] Non-Negotiable SLA Standards
+DESCRIPTION:Daily SLA checklist:\\n- Client Support Ticket: < 2 Hours -> A
+ utomatic routing to technical team\\n- Inbound Lead RFP: Proposal in < 2 
+ Hours -> Proposal Factory automation triggered\\n- Lead Value >= $10\,000
+  USD: Action within 24 Hours -> Personalized CEO Video Message sent\\n- N
+ egative Brand Review: Action within < 1 Hour -> CEO Review Queue notifica
+ tion\\n- NPS Score < 40: Action within < 48 Hours -> Emergency Review Mee
+ ting triggered\\n- System Hosted Uptime: 99.9% Guarantee -> Instant opera
+ tions engineering alert
+STATUS:CONFIRMED
+TRANSP:FREE
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCITBD App — User Guideline (All Functions with Examples)</title>
+<style>
+:root{--bg:#0f1419;--card:#1a222c;--line:#2b3644;--txt:#e8edf2;--muted:#9aa7b5;--acc:#e63946;--ok:#2ecc71;--warn:#f1c40f;--info:#3498db}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7}
+.wrap{max-width:1080px;margin:0 auto;padding:20px}
+header.hero{background:linear-gradient(135deg,#1a222c,#3a0d12);border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:20px}
+header.hero h1{margin:0 0 6px;font-size:26px}
+header.hero p{margin:4px 0;color:var(--muted)}
+.badge{display:inline-block;background:var(--acc);border-radius:20px;padding:2px 12px;font-size:12px;margin-right:6px}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:20px;columns:2;font-size:14px}
+nav.toc a{color:var(--info);text-decoration:none}
+nav.toc li{margin:3px 0}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:18px}
+section.card h2{margin-top:0;border-bottom:2px solid var(--acc);padding-bottom:8px;font-size:20px}
+h3{color:var(--warn);margin-bottom:4px}
+code{background:#0b0f14;padding:2px 7px;border-radius:6px;color:#7ef0c1;font-size:13px}
+pre{background:#0b0f14;border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;font-size:13px;color:#cfe3d4}
+pre b{color:#7ef0c1}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#222d3a}
+ol.steps li,ul.tips li{margin:6px 0}
+.tip{background:#13251a;border-left:4px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:14px}
+.warn{background:#2b230f;border-left:4px solid var(--warn);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:14px}
+.path{color:var(--muted);font-size:13px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px}
+@media(max-width:700px){nav.toc{columns:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<h1>📘 SCITBD Application — Complete User Guideline</h1>
+<p>SCIT CRM + OSINT Trace + CEO Office + AutoFlows · one guide for every function, each with a concrete example.</p>
+<p><span class="badge">Production</span> <code>https://scit.zya.me/trace</code> <span class="badge">Local dev</span> <code>http://127.0.0.1:8099</code> <span class="badge">BST Asia/Dhaka</span></p>
+</header>
+
+<nav class="toc">
+<strong>Contents</strong>
+<ol>
+<li><a href="#start">1. Getting started</a></li>
+<li><a href="#dashboard">2. Dashboard</a></li>
+<li><a href="#leads">3. Leads (incl. generator + scoring)</a></li>
+<li><a href="#companies">4. Companies &amp; Contacts</a></li>
+<li><a href="#tasks">5. Tasks &amp; Interactions</a></li>
+<li><a href="#markets">6. Markets</a></li>
+<li><a href="#knowledge">7. Knowledge Bank + Clarity</a></li>
+<li><a href="#faq">8. FAQ</a></li>
+<li><a href="#chat">9. Support chat, tickets &amp; WhatsApp</a></li>
+<li><a href="#aichat">10. AI Chat + slash commands</a></li>
+<li><a href="#ailib">11. AI Library (all agents)</a></li>
+<li><a href="#video">12. Video Productions (OpenMontage)</a></li>
+<li><a href="#trace">13. URL Trace, OSINT tools &amp; Agent Browser</a></li>
+<li><a href="#tooljet">14. ToolJet dashboards</a></li>
+<li><a href="#security">15. Security enum</a></li>
+<li><a href="#ceo">16. CEO Office</a></li>
+<li><a href="#autoflows">17. AutoFlows</a></li>
+<li><a href="#search">18. Global search</a></li>
+<li><a href="#trouble">19. Troubleshooting</a></li>
+</ol>
+</nav>
+
+<section class="card" id="start">
+<h2>1. Getting started</h2>
+<ol class="steps">
+<li>Open the app at <code>https://scit.zya.me/trace</code> (production) or run the PHP server locally so <code>http://127.0.0.1:8099</code> responds (root <code>index.php</code> = OSINT Framework home). All links adapt to either base automatically.</li>
+<li>Open <code>/sccrm/</code> for the CRM, <code>/sccrm/ai/</code> for AI Chat, <code>/ceo/</code> for the CEO Office.</li>
+<li>Everything degrades gracefully: if an integration (Ollama, ToolJet, WhatsApp) is offline you get a setup hint, never a crash.</li>
+</ol>
+<div class="tip"><b>Example:</b> first visit → Dashboard shows KPI cards. If a card says “unconfigured”, follow its hint (e.g. set <code>TOOLJET_HOST</code>) — the rest keeps working.</div>
+</section>
+
+<section class="card" id="dashboard">
+<h2>2. Dashboard <span class="path">/sccrm/index.php</span></h2>
+<p>Live KPI cards (new leads, open tasks, tickets), module shortcuts, SLA badges. Click any card to jump to its module.</p>
+<div class="tip"><b>Example:</b> “1160 new leads” card → click → filtered Leads list.</div>
+</section>
+
+<section class="card" id="leads">
+<h2>3. Leads <span class="path">/sccrm/leads/</span></h2>
+<h3>List / create / edit / delete</h3>
+<ol class="steps">
+<li><b>List:</b> open <code>leads/</code> — sortable table with score + status.</li>
+<li><b>Create:</b> <code>leads/create.php</code> → fill Company “Acme Ltd”, Contact “Rahim”, Email, Source → Save.</li>
+<li><b>Edit/Delete:</b> row actions → <code>edit.php?id=…</code> / delete with confirm.</li>
+<li><b>Logs:</b> <code>logs.php</code> shows the audit trail of lead changes.</li>
+</ol>
+<h3>Lead generator + scoring</h3>
+<p><code>generate.php</code> bulk-creates targeted leads; each lead carries a numeric <b>score</b> (higher = hotter). Work top scores first.</p>
+<pre><b>Example — qualify in chat:</b>
+You:  /leads 5
+App:  <b>Latest 5 leads:</b>
+      - #1201 Karim Uddin @ Acme Ltd — score 82 [new]
+      …</pre>
+</section>
+
+<section class="card" id="companies">
+<h2>4. Companies &amp; Contacts <span class="path">/sccrm/companies/ · /sccrm/contacts/</span></h2>
+<ol class="steps">
+<li>Companies: full CRUD + <code>view.php</code> (profile, linked contacts, leads, interactions).</li>
+<li>Contacts: full CRUD + view; link each contact to a company so histories stay connected.</li>
+</ol>
+<div class="tip"><b>Example:</b> Company “Acme Ltd” → View → see Rahim (contact), 3 leads, 5 interactions in one place.</div>
+</section>
+
+<section class="card" id="tasks">
+<h2>5. Tasks &amp; Interactions <span class="path">/sccrm/tasks/ · /sccrm/interactions/</span></h2>
+<ol class="steps">
+<li>Tasks: create with title, priority, status, due date; move <code>new → in_progress → completed</code> (or <code>cancelled</code>).</li>
+<li>Interactions: log every call/meeting/email against a lead or company — the relationship timeline.</li>
+</ol>
+<pre><b>Example — chat shortcut:</b>
+You:  /crm task Call Acme about proposal
+App:  ✅ Task created …</pre>
+</section>
+
+<section class="card" id="markets">
+<h2>6. Markets <span class="path">/sccrm/markets/</span></h2>
+<p>Track the 7 geographic regions (South Asia, Middle East, Europe, North America, Oceania, SE Asia, Africa): full CRUD, focus markets feed Block planning.</p>
+<div class="tip"><b>Example:</b> add Market “UAE — Enterprise IT”, tag leads to it, prioritize during Block 2 (12:00–18:00 BST).</div>
+</section>
+
+<section class="card" id="knowledge">
+<h2>7. Knowledge Bank + Clarity <span class="path">/sccrm/knowledge/</span></h2>
+<h3>Articles (CRUD + views counter)</h3>
+<ol class="steps">
+<li><code>create.php</code> → title, service, content, tags, status (<code>draft</code>/<code>published</code>).</li>
+<li><code>view.php?id=…</code> → reads, related articles, FAQs. Related = same service, published, most-viewed.</li>
+<li><code>edit.php / delete.php</code> → maintain; drafts hide from related lists.</li>
+</ol>
+<h3>Clarity prose modes (on every article)</h3>
+<p>Each article has a Clarity card — co-write/rewrite/review/lint that never invents facts:</p>
+<table><tr><th>Button</th><th>What happens</th><th>Example</th></tr>
+<tr><td><b>Rewrite</b></td><td>TinyLLM rewrite → preview → <i>Save rewrite as new draft</i></td><td>Polish a draft announcement, save as draft #16</td></tr>
+<tr><td><b>Review</b></td><td>Critique only — diagnosis + located quotes, no changes</td><td>“Paragraph 2 buries the price condition…”</td></tr>
+<tr><td><b>Lint</b></td><td>Instant offline stats (words, sentences, hedges, cadence)</td><td><code>size: {words: 240, sentences: 12…}</code></td></tr>
+</table>
+</section>
+
+<section class="card" id="faq">
+<h2>8. FAQ <span class="path">/sccrm/faq/</span></h2>
+<p>Public FAQs per service + <code>admin.php</code> to manage categories/questions. Linked automatically under Knowledge articles of the same service.</p>
+<div class="tip"><b>Example:</b> add “What is your proposal SLA?” → answer “Sub-2-hour technical proposals.” → appears on every proposal-service article.</div>
+</section>
+
+<section class="card" id="chat">
+<h2>9. Support chat, tickets &amp; WhatsApp <span class="path">/sccrm/chat/</span></h2>
+<ol class="steps">
+<li><b>Tickets:</b> <code>chat/create.php</code> opens a ticket; <code>view.php</code> threads replies. <b>Ticket AI</b> drafts replies + triage auto-classifies (human review queue).</li>
+<li><b>WhatsApp:</b> <code>chat/whatsapp.php</code> — scan QR to connect (Evolution API), inbox + lead outreach + CEO alerts.</li>
+</ol>
+<pre><b>Example:</b> Ticket #42 “price query” → Ticket AI suggests reply → agent approves → sent. SLA: first response &lt; 2h.</pre>
+</section>
+
+<section class="card" id="aichat">
+<h2>10. AI Chat + slash commands <span class="path">/sccrm/ai/</span></h2>
+<p>Threaded chat (TinyLLM local-first, offline template fallback). Type <code>/help</code> anytime. Key commands:</p>
+<table><tr><th>Command</th><th>Example</th><th>Result</th></tr>
+<tr><td><code>/briefing</code></td><td><code>/briefing</code></td><td>CEO block briefing (tasks, escalations, progress %)</td></tr>
+<tr><td><code>/leads [n]</code></td><td><code>/leads 5</code></td><td>Latest n leads with scores</td></tr>
+<tr><td><code>/tasks</code></td><td><code>/tasks</code></td><td>CEO block queue + CRM open count</td></tr>
+<tr><td><code>/blog · /social · /email</code></td><td><code>/social Eid campaign</code></td><td>Draft saved to Knowledge Bank (returns draft #id)</td></tr>
+<tr><td><code>/rewrite · /review · /lint</code></td><td><code>/review Our platform leverages robust synergies.</code></td><td>Clarity pass on pasted text (review never rewrites)</td></tr>
+<tr><td><code>/clarity &lt;mode&gt; | &lt;text&gt;</code></td><td><code>/clarity rewrite | We do IT stuff good.</code></td><td>Explicit-mode Clarity run</td></tr>
+<tr><td><code>/ceo list|create|done</code></td><td><code>/ceo create Proposal for Acme | high</code></td><td>CEO queue ops for this BST block</td></tr>
+<tr><td><code>/crm task|lead</code></td><td><code>/crm lead Acme | Rahim | r@acme.com</code></td><td>Quick CRM capture</td></tr>
+<tr><td><code>/trace &lt;url&gt;</code></td><td><code>/trace example.com</code></td><td>SEO/security/perf scores</td></tr>
+<tr><td><code>/browser …</code></td><td><code>/browser research example.com | pricing</code></td><td>Rendered-Chromium intel</td></tr>
+<tr><td><code>/skill [query]</code></td><td><code>/skill injection</code></td><td>Agentic-skills security reference</td></tr>
+<tr><td><code>/status</code></td><td><code>/status</code></td><td>Model online/offline + latency</td></tr>
+</table>
+</section>
+
+<section class="card" id="ailib">
+<h2>11. AI Library <span class="path">/sccrm/ai/library.php</span></h2>
+<p>Every agent integration on one page with live status dots (green = ready, amber = degraded, grey = missing): Content &amp; Writing (Clarity), Browser &amp; Trace, Memory &amp; Knowledge, Messaging, Video &amp; Media, Dashboards &amp; Apps.</p>
+<div class="tip"><b>Example:</b> amber dot on ToolJet → click → hint says set <code>TOOLJET_HOST</code>; Clarity stays green (lint is fully offline).</div>
+</section>
+
+<section class="card" id="video">
+<h2>12. Video Productions — OpenMontage · agentic <span class="path">/sccrm/video/</span></h2>
+<ol class="steps">
+<li><b>Request:</b> title + pipeline (13: animated-explainer, cinematic, clip-factory…) + brief + budget (≤ $10 cap) → scaffolds <code>data/video-projects/&lt;slug&gt;/</code> with <code>brief.md</code> + <code>models.json</code>.</li>
+<li><b>Preflight strip:</b> runtimes (ffmpeg ✅ · remotion ✅ · hyperframes ✅/❌), capability counts, warnings; <code>↻ refresh preflight</code> rescans (cached 10 min).</li>
+<li><b>View 👁:</b> brief, models, file list, final-ready badge.</li>
+<li><b>Edit ✏️:</b> title/pipeline/status/budget/brief (cap-enforced, audit rows updated).</li>
+<li><b>Delete 🗑:</b> confirm → removes audit rows + project files.</li>
+<li><b>Agent flow:</b> request → research → proposal (<b>gate: human approves</b>) → script → scenes → assets → edit → compose. Gates are binding — early “go ahead” never covers later gates.</li>
+</ol>
+<pre><b>Example:</b> “Acme launch teaser” · cinematic · budget $5 →
+flash <i>Production requested: acme-launch-teaser</i> → agent runs
+pipeline_defs/cinematic.yaml → proposal gate → … → final.mp4.</pre>
+<div class="warn"><b>Paid models need keys</b> in <code>external/openmontage/.env</code> (FAL_KEY unlocks most; ELEVENLABS_API_KEY for voice). Zero-key path (ffmpeg + local TTS/STT) always works.</div>
+</section>
+
+<section class="card" id="trace">
+<h2>13. URL Trace, OSINT tools &amp; Agent Browser <span class="path">/sccrm/trace/ · /trace/ · root index</span></h2>
+<ol class="steps">
+<li><b>URL Trace</b> (<code>/sccrm/trace/</code> or <code>/trace &lt;url&gt;</code>): HTTP status, load ms, title + SEO / Security / Performance scores + improvement notes.</li>
+<li><b>OSINT home</b> (root <code>index.php</code>): searchable directory of investigation tools by category.</li>
+<li><b>Agent Browser</b> (<code>/sccrm/trace/agent_browser.php</code>): rendered Chromium for SPA pages — open, read, snapshot, screenshot; monitor URLs for uptime; act (click/fill) for form flows.</li>
+</ol>
+<pre><b>Example:</b> trace <i>client-site.com</i> → SEO 72/100 (missing meta description), Security 90/100 → attach to the proposal as evidence.</pre>
+</section>
+
+<section class="card" id="tooljet">
+<h2>14. ToolJet dashboards <span class="path">/sccrm/dashboards/tooljet.php</span></h2>
+<ol class="steps">
+<li>Self-host: <code>docker run -p 80:80 tooljet/try:ee-lts-latest</code> → open <code>http://127.0.0.1</code> → admin account → build SCCRM app (note its <b>slug</b>) → Profile → API tokens (copy <b>token</b>).</li>
+<li>Set env: <code>TOOLJET_HOST</code>, <code>TOOLJET_API_TOKEN</code>, <code>TOOLJET_APP_SCCRM</code> (+ CEO/TRACE slugs, workflow webhook URLs) → restart PHP.</li>
+<li>Dashboard iframes the app; workflows fire via webhook URLs (URL itself is the secret).</li>
+</ol>
+<div class="tip"><b>Example:</b> <code>TOOLJET_APP_SCCRM=sccrm-ops</code> → live ops board embedded in the CRM page.</div>
+</section>
+
+<section class="card" id="security">
+<h2>15. Security enum <span class="path">/sccrm/security/</span></h2>
+<p>Subdomain/asset enumeration helpers (amass/ASVS libraries) for client security reviews. Run scoped, with written permission only.</p>
+<div class="tip"><b>Example:</b> pre-engagement: enumerate <code>client.com</code> subdomains → attach exposure list to the cybersecurity AMC proposal.</div>
+</section>
+
+<section class="card" id="ceo">
+<h2>16. CEO Office <span class="path">/ceo/</span></h2>
+<ol class="steps">
+<li><b>Dashboard</b> (<code>dashboard.html</code>): revenue vs $1.5M goal, pipeline, ROAS, uptime, block tasks.</li>
+<li><b>24h BST blocks:</b> B1 06–12 South Asia · B2 12–18 ME/EU · B3 18–24 UK/NA · B4 00–06 Oceania/reboot. Tasks materialise per block; SLA timers follow the block.</li>
+<li><b>Chatbot</b> (<code>chatbot/api.php</code>): CEO Q&A with block context.</li>
+<li><b>Content engine</b>: daily SEO/social/email drafts; <b>Playbooks</b> (<code>ceo/playbooks/</code>): evergreen strategy docs (e.g. digital-marketing sales workflow).</li>
+<li><b>Automation</b>: <code>.bat</code> schedulers + <code>scitbd_schedule.ics</code> keep blocks firing on Windows Task Scheduler.</li>
+</ol>
+<pre><b>Example (Block 3):</b> US inquiry 21:40 → sub-2h proposal SLA → ≥$10k deal triggers CEO video message within 24h.</pre>
+</section>
+
+<section class="card" id="autoflows">
+<h2>17. AutoFlows <span class="path">/autoflows/</span></h2>
+<ol class="steps">
+<li><b>Hub</b> (<code>index.php</code>): workflow runs, queues, retry lists.</li>
+<li><b>Slack</b> (<code>slack-php-integration/</code>): lead alerts + CEO escalation posts into Slack channels.</li>
+<li><b>Public API</b> (<code>public/</code>): webhook receivers (lead intake, trace callbacks).</li>
+<li><b>Manuals:</b> <code>USER_MANUAL.md</code> + <code>AutoFlows_User_Manual.pdf</code>.</li>
+</ol>
+<div class="tip"><b>Example:</b> new hot lead → AutoFlow posts “🔥 score 82 — Acme Ltd” to #sales within a minute.</div>
+</section>
+
+<section class="card" id="search">
+<h2>18. Global search <span class="path">/sccrm/search.php</span></h2>
+<p>One box over leads, companies, contacts, tasks, tickets, articles. Enter → grouped results with deep links.</p>
+<div class="tip"><b>Example:</b> search “Acme” → company card + 3 leads + proposal task + 2 tickets.</div>
+</section>
+
+<section class="card" id="trouble">
+<h2>19. Troubleshooting</h2>
+<table><tr><th>Symptom</th><th>Fix</th></tr>
+<tr><td>Page hangs / timeouts</td><td>Usually a live probe (preflight/registry). Use refresh links sparingly; results cache automatically.</td></tr>
+<tr><td>AI replies “template fallback”</td><td>Ollama down — drafts still work via templates. Restart Ollama, check <code>/status</code>.</td></tr>
+<tr><td>ToolJet panel shows setup card</td><td>Set <code>TOOLJET_HOST</code> + token + app slug, restart PHP. CRM keeps working meanwhile.</td></tr>
+<tr><td>Video shows “studio offline”</td><td>Needs ffmpeg + python (+ node for Remotion): run <code>php tools/install_openmontage.php --doctor</code>.</td></tr>
+<tr><td>WhatsApp disconnected</td><td>Re-scan QR at <code>chat/whatsapp.php</code>; check Evolution API container.</td></tr>
+<tr><td>Empty Knowledge related lists</td><td>Related needs same-service <i>published</i> articles — publish at least two per service.</td></tr>
+</table>
+</section>
+
+<footer>SCITBD · Social Communication IT Bangladesh · Guideline generated 2026-10-08 · Asia/Dhaka (BST)</footer>
+</div>
+</body>
+</html>

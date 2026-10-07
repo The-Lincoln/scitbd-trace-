@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "skills": {
+    "scitbd-ceo": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-ceo/SKILL.md",
+      "agent": "ceo",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-marketing": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-marketing/SKILL.md",
+      "agent": "marketing",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-sales": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-sales/SKILL.md",
+      "agent": "sales",
+      "model": "google/gemma-2-9b-it"
+    },
+    "scitbd-content": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-content/SKILL.md",
+      "agent": "content",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-lead-generation": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-lead-generation/SKILL.md",
+      "agent": "lead_generation",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-lead-scanner": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-lead-scanner/SKILL.md",
+      "agent": "lead_scanner",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-crm": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-crm/SKILL.md",
+      "agent": "crm",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-strategy": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-strategy/SKILL.md",
+      "agent": "strategy",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-social": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-social/SKILL.md",
+      "agent": "social",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-email": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-email/SKILL.md",
+      "agent": "email",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-paid-media": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-paid-media/SKILL.md",
+      "agent": "paid_media",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-seo": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-seo/SKILL.md",
+      "agent": "seo",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-report": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-report/SKILL.md",
+      "agent": "report",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-action": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-action/SKILL.md",
+      "agent": "action",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-trigger": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-trigger/SKILL.md",
+      "agent": "trigger",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-rules": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-rules/SKILL.md",
+      "agent": "rules",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-knowledge": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-knowledge/SKILL.md",
+      "agent": "knowledge",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-ai-analytics": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-ai-analytics/SKILL.md",
+      "agent": "ai_analytics",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-customer-success": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-customer-success/SKILL.md",
+      "agent": "customer_success",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-market-intelligence": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-market-intelligence/SKILL.md",
+      "agent": "market_intelligence",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-icp": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-icp/SKILL.md",
+      "agent": "icp",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-cro": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-cro/SKILL.md",
+      "agent": "conversion_optimization",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-blog": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-blog/SKILL.md",
+      "agent": "blog",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-social-research": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-social-research/SKILL.md",
+      "agent": "social_research",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-social-growth": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-social-growth/SKILL.md",
+      "agent": "social_growth",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-learning": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-learning/SKILL.md",
+      "agent": "learning_engine",
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "scitbd-products": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-products/SKILL.md",
+      "agent": "products",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "scitbd-ads": {
+      "source": "local",
+      "skillPath": ".agents/skills/scitbd-ads/SKILL.md",
+      "agent": "ads",
+      "model": "HuggingFaceH4/zephyr-7b-beta"
+    },
+    "cloudflare-email-service": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/cloudflare-email-service/SKILL.md"
+    },
+    "hf-cli": {
+      "source": "huggingface/skills",
+      "sourceType": "github",
+      "skillPath": "skills/hf-cli/SKILL.md"
+    }
+  }
+}

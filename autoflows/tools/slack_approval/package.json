@@ -1,0 +1,16 @@
+{
+  "name": "autoflows-slack-approval",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SCITBD Slack daily approval bot, Bolt + Block Kit (Block 1 gate for AutoFlows cron).",
+  "main": "slack_daily_approval.js",
+  "dependencies": {
+    "@slack/bolt": "^3.0.0",
+    "axios": "^1.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

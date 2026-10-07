@@ -1,0 +1,1 @@
+{"author":"Nova Kernel","confidence":0.95,"description":"Always pass API keys via HTTP headers, never URL query (Nova promoted, conf 0.95).","license":"Apache-2.0","name":"nova-api-key-header-pattern","source":"council-review-round-5","status":"promoted","tags":"security, api, patterns","version":"1.0.0"}

@@ -1,0 +1,31 @@
+{
+    "name": "scitbd/slack-php-integration",
+    "description": "PHP Slack Integration - Channel-based messaging, webhooks, and automated alerts",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.8",
+        "monolog/monolog": "^3.6",
+        "vlucas/phpdotenv": "^5.0",
+        "firebase/php-jwt": "^6.11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SCITBD\\Slack\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8888 -t public/",
+        "start-8880": "php -S localhost:8880 -t public/",
+        "test": "phpunit",
+        "lint": "phpcs --standard=PSR12 src/"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpunit/phpunit": true
+        }
+    }
+}
