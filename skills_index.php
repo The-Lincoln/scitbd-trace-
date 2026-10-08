@@ -84,4 +84,33 @@ return [
     'browserskill_mirror' => [
         'external/browserskill-lincoln',
     ],
+    // Neuron AI agentic PHP framework (vendored: external/neuron-ai)
+    'neuron' => [
+        'neuron-ai', 'neuron-agent', 'neuron-rag', 'neuron-tool', 'neuron-workflow',
+        'neuron-structured-output', 'neuron-streaming', 'neuron-evaluation',
+    ],
+    // Contributor profile (vendored: external/Gokul-ram-j — people asset, not code)
+    'talent' => [
+        'contributor-gokul',
+    ],
+    // SEO content-engine reference maps (vendored: external/content-engine)
+    'content_ref' => [
+        'content-engine',
+    ],
+    // SCITBD CEO directive tier — canonical lives in ceo/.agents/skills/scitbd-*
+    // App implementations: skills/skills/skill_*.php ; DB: directive_* + daily_tasks
+    'scitbd_directive' => [
+        'scitbd-action', 'scitbd-ads', 'scitbd-ai-analytics', 'scitbd-blog', 'scitbd-ceo',
+        'scitbd-content', 'scitbd-crm', 'scitbd-cro', 'scitbd-customer-success',
+        'scitbd-email', 'scitbd-icp', 'scitbd-knowledge', 'scitbd-lead-generation',
+        'scitbd-lead-scanner', 'scitbd-learning', 'scitbd-market-intelligence',
+        'scitbd-marketing', 'scitbd-paid-media', 'scitbd-products', 'scitbd-report',
+        'scitbd-rules', 'scitbd-sales', 'scitbd-seo', 'scitbd-social',
+        'scitbd-social-growth', 'scitbd-social-research', 'scitbd-strategy', 'scitbd-trigger',
+    ],
+    // Alias pairs (both names resolve; primary listed first)
+    'aliases' => [
+        'tencentdb-agent-memory <=> agent-memory',
+        'tencent-browserskill <=> browserskill',
+    ],
 ];

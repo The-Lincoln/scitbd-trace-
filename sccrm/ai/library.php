@@ -19,7 +19,14 @@ foreach ([
     $osintRoot . '/autoflows/app/services/HarnessGuide.php',
     $osintRoot . '/autoflows/app/services/ScientificSkills.php',
     $osintRoot . '/autoflows/app/services/BrowserUseKey.php',
+    $osintRoot . '/autoflows/app/services/NeuronAi.php',
+    $osintRoot . '/autoflows/app/services/ContributorGokul.php',
+    $osintRoot . '/autoflows/app/services/ContentEngineRef.php',
     __DIR__ . '/clarity_agent.php',
+    __DIR__ . '/neuron_agent.php',
+    __DIR__ . '/neuron_chat_agent.php',
+    __DIR__ . '/contributor_gokul_agent.php',
+    __DIR__ . '/content_engine_ref_agent.php',
 ] as $f) {
     if (is_file($f)) {
         require_once $f;
@@ -40,6 +47,7 @@ function libProbe(callable $fn) {
 $groups = [
     'Content & Writing' => [
         ['name' => 'Clarity', 'desc' => 'Co-write / rewrite / review / lint reader-facing prose; never invents facts. Lint fully offline.', 'page' => '../knowledge/', 'probe' => fn() => function_exists('clarityAgentStatus') ? clarityAgentStatus() : ['ok' => false], 'base' => 'sccrm'],
+        ['name' => 'Content Engine Ref', 'desc' => '6-phase SEO pipeline ref (research→map→briefs→adversarial review→machine gate→publish); evidence-only drafts, gate blocks save.', 'page' => null, 'probe' => fn() => class_exists('ContentEngineRef') ? ContentEngineRef::status('sccrm') : (function_exists('contentRefStatus') ? contentRefStatus() : ['ok' => false])],
     ],
     'Browser & Trace' => [
         ['name' => 'Agent Browser', 'desc' => 'Rendered Chromium via agent-browser CLI (open, read, snapshot, shot).', 'page' => 'trace/agent_browser.php', 'probe' => fn() => class_exists('AgentBrowser') ? AgentBrowser::status('sccrm') : ['ok' => false]],
@@ -55,10 +63,14 @@ $groups = [
     'Messaging' => [
         ['name' => 'Evolution API', 'desc' => 'WhatsApp: QR connect, inbox, lead outreach, CEO alerts.', 'page' => 'chat/whatsapp.php', 'probe' => fn() => class_exists('EvolutionApi') ? EvolutionApi::status() : ['ok' => false]],
         ['name' => 'Ticket AI + Triage', 'desc' => 'AI draft replies + auto-classification with human review queue.', 'page' => 'chat/', 'probe' => fn() => ['ok' => true, 'hint' => 'TinyLLM local-first']],
+        ['name' => 'Neuron AI (CEO + Chat)', 'desc' => 'Workflow-based PHP agents: CEO reasoning, ticket drafts/triage, WhatsApp; 13 upstream skills (agent/rag/tool/workflow). TinyLLM fallback.', 'page' => 'chat/', 'probe' => fn() => class_exists('NeuronAi') ? NeuronAi::status('sccrm') : (function_exists('neuronChatStatus') ? neuronChatStatus() : ['ok' => false])],
     ],
     'Video & Media' => [
         ['name' => 'OpenMontage', 'desc' => 'Agentic video productions: 13 pipelines, gates, budgets.', 'page' => '../video/', 'probe' => fn() => class_exists('OpenMontage') ? OpenMontage::status() : ['ok' => false], 'base' => 'sccrm'],
         ['name' => 'Diagram Design', 'desc' => '44 editorial diagram types as HTML+SVG for reports.', 'page' => null, 'probe' => fn() => class_exists('DiagramDesign') ? DiagramDesign::status() : ['ok' => false]],
+    ],
+    'Talent & Contributors' => [
+        ['name' => 'Contributor Gokul', 'desc' => 'Full-stack + AI/RAG profile (React/Next.js, Node/Spring/FastAPI, MongoDB/MySQL): task-to-stack matching, assignment proposals (human assigns).', 'page' => null, 'probe' => fn() => class_exists('ContributorGokul') ? ContributorGokul::status('sccrm') : (function_exists('contributorGokulStatus') ? contributorGokulStatus() : ['ok' => false])],
     ],
     'Dashboards & Apps' => [
         ['name' => 'ToolJet', 'desc' => 'Low-code KPI/lead/trace apps + workflow webhooks.', 'page' => 'dashboards/tooljet.php', 'probe' => fn() => class_exists('ToolJet') ? ToolJet::status() : ['ok' => false]],
