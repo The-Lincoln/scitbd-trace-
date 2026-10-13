@@ -122,6 +122,7 @@ include __DIR__ . '/includes/header.php';
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/companies/"><i class="fas fa-building me-1"></i> Companies</a></div></li>
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/interactions/"><i class="fas fa-comments me-1"></i> Interactions</a></div></li>
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/tasks/"><i class="fas fa-tasks me-1"></i> Tasks</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/faq/"><i class="fas fa-question-circle me-1"></i> FAQs</a></div></li>
                 </ul>
             </div>
         </div>
