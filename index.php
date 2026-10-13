@@ -123,6 +123,9 @@ include __DIR__ . '/includes/header.php';
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/interactions/"><i class="fas fa-comments me-1"></i> Interactions</a></div></li>
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/tasks/"><i class="fas fa-tasks me-1"></i> Tasks</a></div></li>
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/faq/"><i class="fas fa-question-circle me-1"></i> FAQs</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/ceo/"><i class="fas fa-crown me-1" style="color:#f1e05a;"></i> SCITBD CEO</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:20px;"><a href="<?= $BASE ?>/sccrm/ceo/operational_plan.php"><i class="fas fa-list-check me-1"></i> Operational Plan</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:20px;"><a href="<?= $BASE ?>/ceo/dashboard.html"><i class="fas fa-satellite-dish me-1"></i> CEO Command Center</a></div></li>
                 </ul>
             </div>
         </div>
