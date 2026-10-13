@@ -41,7 +41,7 @@ try {
         $sccrm_stats['total_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads")->fetchColumn();
         $sccrm_stats['new_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads WHERE status = 'new'")->fetchColumn();
         $sccrm_stats['pipeline'] = $sdb->query("SELECT status, COUNT(*) AS n FROM leads GROUP BY status ORDER BY n DESC")->fetchAll(PDO::FETCH_ASSOC);
-        $sccrm_stats['recent'] = $sdb->query("SELECT id, first_name, last_name, email, company_name, position, source, status, score, created_at FROM leads ORDER BY created_at DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
+        $sccrm_stats['recent'] = $sdb->query("SELECT id, first_name, last_name, email, company_name, position, source, status, score, created_at FROM leads ORDER BY created_at DESC LIMIT 2")->fetchAll(PDO::FETCH_ASSOC);
         $sccrm_stats['available'] = true;
     }
 } catch (Throwable $e) {
