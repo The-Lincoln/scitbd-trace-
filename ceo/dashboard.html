@@ -139,41 +139,50 @@
     </div>
 
     <div class="row g-3">
-        <!-- Inbound Lead Simulator Form -->
+        <!-- SCCRM Lead Generation (replaces standalone ingest form) -->
         <div class="col-md-5">
             <div class="card p-4">
-                <h5 class="fw-bold text-white mb-3">⚡ Capture Inbound Prospect</h5>
-                <form id="leadForm">
-                    <div class="mb-3">
-                        <label class="form-label">Client / Entity Name</label>
-                        <input type="text" id="clientName" class="form-control bg-dark text-white border-secondary" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" id="email" class="form-control bg-dark text-white border-secondary" required>
-                    </div>
+                <h5 class="fw-bold text-white mb-1">⚡ SCCRM Lead Generation</h5>
+                <p class="text-muted small mb-3">Generate OSINT-enriched leads straight into the SCCRM pipeline — no manual scoring, no duplicate ingest.</p>
+                <div id="sccrmLeadAlert"></div>
+                <form id="sccrmLeadForm" method="POST" action="../sccrm/leads/generate.php">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Target Market</label>
-                            <input type="text" id="country" class="form-control bg-dark text-white border-secondary" placeholder="e.g. UAE, USA" required>
+                            <label class="form-label">Number of Leads</label>
+                            <select name="count" class="form-select bg-dark text-white border-secondary">
+                                <option value="3">3 leads</option>
+                                <option value="5" selected>5 leads</option>
+                                <option value="10">10 leads</option>
+                                <option value="15">15 leads</option>
+                                <option value="20">20 leads</option>
+                                <option value="25">25 leads</option>
+                                <option value="50">50 leads</option>
+                            </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Deal Value ($ USD)</label>
-                            <input type="number" id="dealValue" class="form-control bg-dark text-white border-secondary" placeholder="10000" required>
+                            <label class="form-label">Target Market <span class="text-muted">(region)</span></label>
+                            <select name="market_id" id="sccrmMarket" class="form-select bg-dark text-white border-secondary">
+                                <option value="">All Markets</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Service Line Capability</label>
-                        <select id="serviceLine" class="form-select bg-dark text-white border-secondary">
-                            <option value="AI & Data Solutions">AI & Data Solutions</option>
-                            <option value="Custom ERP Software">Custom ERP Software</option>
-                            <option value="Humanitarian M&E System">Humanitarian M&E System</option>
-                            <option value="Cloud Transformation">Cloud Transformation</option>
+                        <label class="form-label">Service Interest</label>
+                        <select name="service_id" id="sccrmService" class="form-select bg-dark text-white border-secondary">
+                            <option value="">All Services</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-scitbd w-100 fw-bold">Dispatch AI Proposal Engine</button>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" name="osint_enrich" value="1" id="sccrmEnrich" checked>
+                        <label class="form-check-label" for="sccrmEnrich">Enrich with OSINT <small class="text-muted d-block">DNS + URL trace per lead (tech stack, SEO/security scores). Slower but smarter.</small></label>
+                    </div>
+                    <button type="submit" name="generate" value="1" class="btn btn-scitbd w-100 fw-bold">⚡ Generate SCCRM Leads</button>
                 </form>
-                <div id="formAlert" class="mt-3"></div>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="../sccrm/leads/create.php" class="btn btn-sm btn-outline-light flex-fill">➕ Manual Add Lead</a>
+                    <a href="../sccrm/leads/" class="btn btn-sm btn-outline-light flex-fill">📋 Pipeline <span class="badge bg-success" id="sccrmLeadCount">–</span></a>
+                    <a href="../sccrm/index.php" class="btn btn-sm btn-outline-light flex-fill">💼 SCCRM</a>
+                </div>
             </div>
         </div>
 
@@ -285,39 +294,39 @@ function updateBSTClock() {
     document.getElementById('bstClock').innerText = bst.toLocaleTimeString('en-GB', { hour12: false });
 }
 
-// Handle Form Submission
-document.getElementById('leadForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const payload = {
-        client_name: document.getElementById('clientName').value,
-        email: document.getElementById('email').value,
-        country: document.getElementById('country').value,
-        deal_value: parseFloat(document.getElementById('dealValue').value),
-        service_line: document.getElementById('serviceLine').value
-    };
-
-    const res = await fetch('index.php?action=submit_lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
-    const result = await res.json();
-
-    const alertBox = document.getElementById('formAlert');
-    if (result.status === 'error') {
-        alertBox.innerHTML = `<div class="alert alert-danger">❌ ${result.message}</div>`;
-    } else if (result.ceo_video_escalation) {
-        alertBox.innerHTML = `<div class="alert alert-warning">🚨 <strong>HIGH VALUE LEAD!</strong> ${result.message} <em>(CEO Video Message Escalation Initiated)</em></div>`;
-    } else {
-        alertBox.innerHTML = `<div class="alert alert-success">✅ ${result.message}</div>`;
+// SCCRM lead-generation options (markets/services/counts, read-only)
+async function fetchSccrmOptions() {
+    try {
+        const res = await fetch('index.php?action=get_sccrm_options');
+        const data = await res.json();
+        if (data.status === 'error' || !data.available) {
+            document.getElementById('sccrmLeadAlert').innerHTML =
+                '<div class="alert alert-warning">⚠️ SCCRM unavailable — <a href="../sccrm/index.php" class="alert-link">open SCCRM directly</a>.</div>';
+            return;
+        }
+        const marketSel = document.getElementById('sccrmMarket');
+        (data.markets || []).forEach(m => {
+            const o = document.createElement('option');
+            o.value = m.id;
+            o.textContent = m.name;
+            marketSel.appendChild(o);
+        });
+        const svcSel = document.getElementById('sccrmService');
+        (data.services || []).forEach(s => {
+            const o = document.createElement('option');
+            o.value = s.id;
+            o.textContent = s.name;
+            svcSel.appendChild(o);
+        });
+        document.getElementById('sccrmLeadCount').innerText = (data.total_leads || 0).toLocaleString('en-US');
+    } catch (e) {
+        console.error("Error loading SCCRM options:", e);
     }
-
-    document.getElementById('leadForm').reset();
-    fetchDashboardData();
-});
+}
 
 // Initial Load & Auto-Refresh
 fetchDashboardData();
+fetchSccrmOptions();
 setInterval(fetchDashboardData, 30000);
 setInterval(updateBSTClock, 1000);
 updateBSTClock();

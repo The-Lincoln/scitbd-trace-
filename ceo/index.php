@@ -485,6 +485,30 @@ if ($action === 'get_dashboard') {
     exit();
 }
 
+// API Route: SCCRM lead-generation options (read-only snapshot for CEO dashboard)
+if ($action === 'get_sccrm_options') {
+    $out = ["status" => "success", "markets" => [], "services" => [], "total_leads" => 0, "new_leads" => 0, "available" => false];
+    try {
+        $sccrmPath = __DIR__ . '/../sccrm/db/scit_crm.db';
+        if (is_file($sccrmPath)) {
+            $sdb = new PDO('sqlite:' . $sccrmPath);
+            $sdb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $out['markets'] = $sdb->query("SELECT id, name FROM markets WHERE is_active = 1 ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
+            $out['services'] = $sdb->query("SELECT id, name FROM services WHERE is_active = 1 ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
+            $out['total_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads")->fetchColumn();
+            $out['new_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads WHERE status = 'new'")->fetchColumn();
+            $out['available'] = true;
+        } else {
+            $out['status'] = "error";
+            $out['message'] = "SCCRM database not found";
+        }
+    } catch (PDOException $e) {
+        $out = ["status" => "error", "message" => "Failed to load SCCRM options"];
+    }
+    echo json_encode($out);
+    exit();
+}
+
 // API Route: Get All 24-Hour BST Operational Blocks
 if ($action === 'get_blocks') {
     try {
