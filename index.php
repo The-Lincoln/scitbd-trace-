@@ -101,6 +101,27 @@ include __DIR__ . '/includes/header.php';
                 </ul>
             </div>
         </div>
+
+        <!-- SCCRM shortcut card -->
+        <div class="card tree-card mt-3" id="sidebar-sccrm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-briefcase me-1" style="color:#7c6cff;"></i> SCCRM</span>
+                <?php if ($sccrm_stats['available']): ?>
+                    <span class="badge" style="background:#7c6cff;"><?= number_format($sccrm_stats['total_leads']) ?> leads</span>
+                <?php endif; ?>
+            </div>
+            <div class="card-body p-0">
+                <ul class="tree">
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/index.php"><i class="fas fa-gauge-high me-1"></i> Dashboard</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/leads/"><i class="fas fa-flag-checkered me-1"></i> Leads<?php if ($sccrm_stats['available'] && $sccrm_stats['new_leads'] > 0): ?> <span class="tree-count"><?= number_format($sccrm_stats['new_leads']) ?> new</span><?php endif; ?></a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/leads/generate.php"><i class="fas fa-bolt me-1"></i> Generate Leads</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/contacts/"><i class="fas fa-users me-1"></i> Contacts</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/companies/"><i class="fas fa-building me-1"></i> Companies</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/interactions/"><i class="fas fa-comments me-1"></i> Interactions</a></div></li>
+                    <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/tasks/"><i class="fas fa-tasks me-1"></i> Tasks</a></div></li>
+                </ul>
+            </div>
+        </div>
     </aside>
 
     <!-- AI Chat Panel -->
