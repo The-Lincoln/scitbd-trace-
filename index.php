@@ -32,7 +32,7 @@ $PAGE_TITLE = $page_title;
 $PAGE_DESC = $page_desc;
 
 // SCCRM leads snapshot (read-only, fail-safe — homepage never breaks if CRM DB is missing)
-$sccrm_stats = ['total_leads' => 0, 'new_leads' => 0, 'pipeline' => [], 'recent' => [], 'available' => false];
+$sccrm_stats = ['total_leads' => 0, 'new_leads' => 0, 'pipeline' => [], 'recent' => [], 'markets' => [], 'services' => [], 'available' => false];
 try {
     $sccrm_db_path = __DIR__ . '/sccrm/db/scit_crm.db';
     if (is_file($sccrm_db_path)) {
@@ -42,6 +42,8 @@ try {
         $sccrm_stats['new_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads WHERE status = 'new'")->fetchColumn();
         $sccrm_stats['pipeline'] = $sdb->query("SELECT status, COUNT(*) AS n FROM leads GROUP BY status ORDER BY n DESC")->fetchAll(PDO::FETCH_ASSOC);
         $sccrm_stats['recent'] = $sdb->query("SELECT id, first_name, last_name, email, company_name, position, source, status, score, created_at FROM leads ORDER BY created_at DESC LIMIT 2")->fetchAll(PDO::FETCH_ASSOC);
+        $sccrm_stats['markets'] = $sdb->query("SELECT id, name FROM markets WHERE is_active = 1 ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
+        $sccrm_stats['services'] = $sdb->query("SELECT id, name FROM services WHERE is_active = 1 ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
         $sccrm_stats['available'] = true;
     }
 } catch (Throwable $e) {
@@ -322,6 +324,84 @@ include __DIR__ . '/includes/header.php';
                             <a href="<?= $BASE ?>/sccrm/index.php" class="btn btn-primary btn-sm">Open SCCRM</a>
                         </div>
                     <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Lead Generation section (mirrors SCCRM → Dashboard → Leads → Generate Leads) -->
+            <div class="card mt-4" id="lead-generation">
+                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span><i class="fas fa-bolt me-2 text-success"></i><strong>Lead Generation</strong>
+                        <small class="text-muted ms-2">Dashboard › Leads › Generate Leads</small>
+                    </span>
+                    <span class="d-flex gap-2">
+                        <a href="<?= $BASE ?>/sccrm/leads/" class="btn btn-sm btn-outline-secondary">All leads</a>
+                        <a href="<?= $BASE ?>/sccrm/leads/generate.php" class="btn btn-sm btn-outline-secondary">Full page</a>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-lg-7">
+                            <h6><i class="fas fa-bolt me-2 text-success"></i>Generate Leads Now</h6>
+                            <p class="text-muted small">Generate realistic leads for your target markets and services. Leads will be auto-scored and added to the pipeline.</p>
+                            <?php if ($sccrm_stats['available']): ?>
+                            <form method="POST" action="<?= $BASE ?>/sccrm/leads/generate.php" class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label" for="gen-count">Number of Leads</label>
+                                    <select name="count" id="gen-count" class="form-select">
+                                        <?php foreach ([3,5,10,15,20,25,50] as $n): ?>
+                                        <option value="<?= $n ?>" <?= $n === 5 ? 'selected' : '' ?>><?= $n ?> leads</option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="gen-market">Target Market</label>
+                                    <select name="market_id" id="gen-market" class="form-select">
+                                        <option value="">All Markets</option>
+                                        <?php foreach ($sccrm_stats['markets'] as $m): ?>
+                                        <option value="<?= (int)$m['id'] ?>"><?= h($m['name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="gen-service">Service Interest</label>
+                                    <select name="service_id" id="gen-service" class="form-select">
+                                        <option value="">All Services</option>
+                                        <?php foreach ($sccrm_stats['services'] as $s): ?>
+                                        <option value="<?= (int)$s['id'] ?>"><?= h($s['name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="osint_enrich" value="1" id="gen-enrich" checked>
+                                        <label class="form-check-label" for="gen-enrich" style="font-size:13px;">
+                                            <i class="fas fa-radar me-1 text-info"></i> Enrich with OSINT
+                                            <small class="text-muted d-block">DNS check + URL trace per lead (tech stack, SEO/security scores). Slower but smarter.</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" name="generate" value="1" class="btn btn-success rounded-pill px-4">
+                                        <i class="fas fa-bolt me-2"></i>Generate Leads
+                                    </button>
+                                </div>
+                            </form>
+                            <?php else: ?>
+                            <div class="alert alert-warning mb-0"><i class="fas fa-triangle-exclamation me-1"></i>SCCRM database not found — <a href="<?= $BASE ?>/sccrm/index.php" class="alert-link">open SCCRM</a> to initialise it, then generate here.</div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-lg-5">
+                            <h6><i class="fas fa-clock me-2 text-info"></i>Auto-Schedule (Cron)</h6>
+                            <p class="small">For automatic hourly generation, add this command to your cron/scheduler:</p>
+                            <div class="bg-light p-3 rounded small">
+                                <code>php <?= h(realpath(__DIR__ . '/sccrm/leads/generator_cli.php') ?: 'sccrm/leads/generator_cli.php') ?></code>
+                            </div>
+                            <hr>
+                            <p class="small text-muted mb-0">
+                                <i class="fas fa-info-circle me-1"></i>On Windows, use Task Scheduler. On Linux/Mac, use cron: <code>* * * * * php /path/to/generator_cli.php</code> (but set it to run every hour, not every minute)
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php elseif (empty($tools)): ?>
