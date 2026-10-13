@@ -111,6 +111,9 @@ include __DIR__ . '/includes/header.php';
                 <?php endif; ?>
             </div>
             <div class="card-body p-0">
+                <div class="p-2">
+                    <a href="<?= $BASE ?>/sccrm/leads/generate.php" class="btn btn-success btn-sm w-100"><i class="fas fa-bolt me-1"></i> Generate Leads</a>
+                </div>
                 <ul class="tree">
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/index.php"><i class="fas fa-gauge-high me-1"></i> Dashboard</a></div></li>
                     <li class="tree-node"><div class="tree-label" style="padding-left:8px;"><a href="<?= $BASE ?>/sccrm/leads/"><i class="fas fa-flag-checkered me-1"></i> Leads<?php if ($sccrm_stats['available'] && $sccrm_stats['new_leads'] > 0): ?> <span class="tree-count"><?= number_format($sccrm_stats['new_leads']) ?> new</span><?php endif; ?></a></div></li>
