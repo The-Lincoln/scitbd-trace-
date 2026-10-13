@@ -67,6 +67,10 @@ return [
     'openviking' => [
         'openviking', 'viking-fs', 'context-db', 'ov-cli', 'scoped-retrieval',
     ],
+    // Social Analyzer username profiler (vendored: external/social-analyzer)
+    'social_analyzer' => [
+        'social-analyzer', 'username-profiler', 'profile-rating', 'metadata-patterns',
+    ],
     // Scientific agent skills (vendored: external/scientific-agent-skills)
     'scientific' => [
         'scientific-skills', 'database-lookup', 'paper-lookup',

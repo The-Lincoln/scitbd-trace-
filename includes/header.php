@@ -209,6 +209,11 @@ $PAGE_DESC = $PAGE_DESC ?? 'Open Source Intelligence Framework - Find tools for 
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?= $BASE ?>/social-analyzer.php" title="Social Analyzer — username across 1000+ sites">
+                        <i class="fas fa-person-search"></i> Social Analyzer
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?= $BASE ?>/godseye.php" title="Godseye Intelligence Dashboard">
                         <i class="fas fa-globe"></i> Godseye
                     </a>

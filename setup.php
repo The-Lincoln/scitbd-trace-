@@ -218,6 +218,7 @@ function run_setup() {
         ['username-search', 'Instant Username Search', 'https://instantusername.com', 'Fast username search across multiple platforms', 'free', 'web', 0, 'username,search'],
         ['username-search', 'UserSearch.org', 'https://usersearch.org', 'Search people by username across platforms', 'free', 'web', 0, 'username,people'],
         ['username-search', 'Maigret', 'https://github.com/soxoj/maigret', 'Username OSINT tool based on Sherlock', 'free', 'software', 0, 'username,cli'],
+        ['username-search', 'Social Analyzer (self-hosted)', 'social-analyzer.php', 'Self-hosted username profiler across 1000+ sites — rating 0-100, metadata, CLI+WebApp (vendored external/social-analyzer)', 'free', 'software', 0, 'username,profiles,social,cli,api,selfhosted'],
         // Username - Social
         ['username-social', 'KnowEm', 'https://knowem.com', 'Username search on 500+ social networks', 'freemium', 'web', 0, 'username,social'],
         ['username-social', 'Checkmarks', 'https://checkmarks.io', 'Username availability and discovery', 'freemium', 'web', 0, 'username,social'],

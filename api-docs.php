@@ -141,6 +141,36 @@ $api_base = $scheme . '://' . $host . $BASE . '/api';
     <div class="col-md-6">
         <div class="card api-card">
             <div class="card-header">
+                <span class="badge bg-success">GET</span>/<span class="badge bg-warning">POST</span> Social Analyzer — username profiler
+            </div>
+            <div class="card-body">
+                <code><?= h($api_base) ?>/social-analyzer.php?username=<em>johndoe</em>&amp;mode=fast&amp;top=100</code>
+                <p class="mt-2 mb-1">Analyze a username across 1000+ sites (vendored <code>external/social-analyzer</code>). POST accepts JSON too.</p>
+                <p class="text-muted small mb-2">Parameters:</p>
+                <ul class="small">
+                    <li><code>username</code> — handle, or comma-separated handles (required)</li>
+                    <li><code>mode</code> — <code>fast</code> | <code>slow</code> | <code>special</code> (default fast)</li>
+                    <li><code>top</code> — only check top N sites (e.g. 100)</li>
+                    <li><code>filter</code> — <code>good</code> | <code>maybe</code> | <code>bad</code> | <code>all</code></li>
+                    <li><code>metadata</code> — <code>1</code> to extract metadata + patterns</li>
+                    <li><code>status=1</code> — vendor/health probe (no username needed)</li>
+                </ul>
+                <p class="text-muted small mb-1">Example response:</p>
+                <pre><code>{
+  "success": true,
+  "username": "johndoe",
+  "summary": {"detected": 12, "total": 100},
+  "profiles": [{"site": "github", "link": "...", "rate": 95}],
+  "ms": 18342
+}</code></pre>
+                <p class="small">UI: <code><?= h($scheme . '://' . $host . $BASE) ?>/social-analyzer.php</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card api-card">
+            <div class="card-header">
                 <span class="badge bg-primary">AUTH</span> Login flow
             </div>
             <div class="card-body">
