@@ -30,6 +30,24 @@ if ($q !== '') {
 
 $PAGE_TITLE = $page_title;
 $PAGE_DESC = $page_desc;
+
+// SCCRM leads snapshot (read-only, fail-safe — homepage never breaks if CRM DB is missing)
+$sccrm_stats = ['total_leads' => 0, 'new_leads' => 0, 'pipeline' => [], 'recent' => [], 'available' => false];
+try {
+    $sccrm_db_path = __DIR__ . '/sccrm/db/scit_crm.db';
+    if (is_file($sccrm_db_path)) {
+        $sdb = new PDO('sqlite:' . $sccrm_db_path);
+        $sdb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sccrm_stats['total_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads")->fetchColumn();
+        $sccrm_stats['new_leads'] = (int)$sdb->query("SELECT COUNT(*) FROM leads WHERE status = 'new'")->fetchColumn();
+        $sccrm_stats['pipeline'] = $sdb->query("SELECT status, COUNT(*) AS n FROM leads GROUP BY status ORDER BY n DESC")->fetchAll(PDO::FETCH_ASSOC);
+        $sccrm_stats['recent'] = $sdb->query("SELECT id, first_name, last_name, email, company_name, position, source, status, score, created_at FROM leads ORDER BY created_at DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
+        $sccrm_stats['available'] = true;
+    }
+} catch (Throwable $e) {
+    $sccrm_stats['available'] = false;
+}
+
 include __DIR__ . '/includes/header.php';
 ?>
 
@@ -174,6 +192,34 @@ include __DIR__ . '/includes/header.php';
                     </div>
                 </a>
             </div>
+
+            <!-- SCCRM + Leads Banner -->
+            <div class="mb-4">
+                <a href="<?= $BASE ?>/sccrm/index.php" class="text-decoration-none" style="color: inherit;">
+                    <div class="card sccrm-banner-card mb-3" style="background: linear-gradient(135deg, #141432, #23234d); border-color: #7c6cff;">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                                <div>
+                                    <h3 class="text-white mb-1"><i class="fas fa-briefcase me-2" style="color:#7c6cff;"></i>SCIT CRM <span class="text-muted" style="font-size:1rem;">· Social Communication IT</span></h3>
+                                    <p class="text-muted mb-0" style="font-size: 0.9rem;">
+                                        Contacts, companies, interactions, tasks &amp; lead pipeline — OSINT-enriched lead generation wired into the directory.
+                                    </p>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <?php if ($sccrm_stats['available']): ?>
+                                        <span class="badge fs-6" style="background:#7c6cff;"><?= number_format($sccrm_stats['total_leads']) ?> Leads</span>
+                                        <span class="badge bg-success fs-6"><?= number_format($sccrm_stats['new_leads']) ?> New</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary fs-6">CRM</span>
+                                    <?php endif; ?>
+                                    <span class="badge bg-info fs-6">Pipeline</span>
+                                    <span class="badge bg-warning fs-6 text-dark">AI / TinyLLM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         <?php endif; ?>
 
         <!-- View toggle -->
@@ -214,6 +260,69 @@ include __DIR__ . '/includes/header.php';
                         </a>
                     </div>
                 <?php endforeach; ?>
+            </div>
+
+            <!-- SCCRM Leads section -->
+            <div class="card mt-4" id="sccrm-leads">
+                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span><i class="fas fa-flag-checkered me-2" style="color:#7c6cff;"></i><strong>SCCRM Leads</strong>
+                        <?php if ($sccrm_stats['available']): ?>
+                            <span class="badge ms-2" style="background:#7c6cff;"><?= number_format($sccrm_stats['total_leads']) ?> total</span>
+                            <span class="badge bg-success"><?= number_format($sccrm_stats['new_leads']) ?> new</span>
+                        <?php endif; ?>
+                    </span>
+                    <span class="d-flex gap-2">
+                        <a href="<?= $BASE ?>/sccrm/leads/" class="btn btn-sm btn-outline-secondary">All leads</a>
+                        <a href="<?= $BASE ?>/sccrm/leads/generate.php" class="btn btn-sm btn-success"><i class="fas fa-bolt me-1"></i>Generate</a>
+                        <a href="<?= $BASE ?>/sccrm/index.php" class="btn btn-sm btn-primary"><i class="fas fa-briefcase me-1"></i>Open SCCRM</a>
+                    </span>
+                </div>
+                <div class="card-body p-0">
+                    <?php if ($sccrm_stats['available'] && count($sccrm_stats['recent']) > 0): ?>
+                        <?php if (!empty($sccrm_stats['pipeline'])): ?>
+                            <div class="px-3 pt-3 d-flex gap-2 flex-wrap">
+                                <?php foreach ($sccrm_stats['pipeline'] as $p): ?>
+                                    <span class="badge bg-light text-dark border"><?= h(ucfirst($p['status'])) ?>: <?= number_format((int)$p['n']) ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Lead</th><th>Company</th><th>Contact</th><th>Source</th><th>Status</th><th>Score</th><th></th></tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($sccrm_stats['recent'] as $lead):
+                                        $lead_name = trim(($lead['first_name'] ?? '') . ' ' . ($lead['last_name'] ?? ''));
+                                        if ($lead_name === '') $lead_name = 'Lead #' . (int)$lead['id'];
+                                    ?>
+                                    <tr>
+                                        <td><strong><?= h($lead_name) ?></strong><div class="small text-muted"><?= h($lead['position'] ?? '') ?></div></td>
+                                        <td><?= h($lead['company_name'] ?? '-') ?></td>
+                                        <td class="small"><?= h($lead['email'] ?? '-') ?></td>
+                                        <td><span class="badge bg-light text-dark border"><?= h($lead['source'] ?? '-') ?></span></td>
+                                        <td><span class="badge bg-success"><?= h(ucfirst($lead['status'] ?? 'new')) ?></span></td>
+                                        <td><?= $lead['score'] !== null && $lead['score'] !== '' ? (int)$lead['score'] : '—' ?></td>
+                                        <td><a class="btn btn-sm btn-outline-secondary" href="<?= $BASE ?>/sccrm/leads/view.php?id=<?= (int)$lead['id'] ?>">View</a></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php elseif ($sccrm_stats['available']): ?>
+                        <div class="p-4 text-center text-muted">
+                            <i class="fas fa-flag-checkered fa-2x mb-2"></i>
+                            <p class="mb-2">No leads yet — generate your first OSINT-enriched batch.</p>
+                            <a href="<?= $BASE ?>/sccrm/leads/generate.php" class="btn btn-success btn-sm"><i class="fas fa-bolt me-1"></i>Generate Leads</a>
+                        </div>
+                    <?php else: ?>
+                        <div class="p-4 text-center text-muted">
+                            <i class="fas fa-briefcase fa-2x mb-2"></i>
+                            <p class="mb-2">SCCRM database not found at <code>sccrm/db/scit_crm.db</code>.</p>
+                            <a href="<?= $BASE ?>/sccrm/index.php" class="btn btn-primary btn-sm">Open SCCRM</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php elseif (empty($tools)): ?>
             <div class="alert alert-warning">
